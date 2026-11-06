@@ -2,7 +2,9 @@
 
 The prompts, files and code from Terra Studio's Claude Design session on 16 October 2026.
 
-**Recording:** [watch the session](RECORDING_URL) · **Slides:** [open the deck](slides/)
+A session by [Bodhi Debnath](https://bodhithings.com) for [Terra Studio](https://studio.terra.do?utm_source=github), with [Project 3rd Rock](https://project3rdrock.com).
+
+**Recording:** [watch the session](https://youtu.be/cHEYSftA1fE) · **Slides:** [open the deck](slides/)
 
 Each folder is one step of the session, in the order we did them. Each has the prompts, a note on what each prompt asks for, and the files it produced.
 
@@ -22,7 +24,7 @@ Each folder is one step of the session, in the order we did them. Each has the p
 - [Claude Code](https://docs.claude.com/en/docs/claude-code/overview) for steps 3 to 5.
 - [Node.js](https://nodejs.org) 18 or later for step 5.
 
-To skip copying files by hand, open Claude Code in an empty folder and paste: `Clone https://github.com/OWNER/REPO and walk me through the README, one step at a time.`
+To skip copying files by hand, open Claude Code in an empty folder and paste: `Clone https://github.com/bodhicodes/ClaudeDesign-Event-Oct-16-26 and walk me through the README, one step at a time.`
 
 ## Why we start with design
 
@@ -41,6 +43,10 @@ Asking for "a website for a nonprofit working on water scarcity" in one prompt u
 - The Earth textures come from the [three.js examples](https://github.com/mrdoob/three.js/tree/dev/examples/textures/planets). The motion project downloads them with a script, so they aren't stored here.
 - Everything else in this repo is under the MIT licence. See [LICENSE](LICENSE).
 
-## About Terra Studio
+## About Terra Studio and Project 3rd Rock
 
 This session was one of Terra Studio's free Build With Us events. Terra Studio is an eight-week intensive where climate and impact professionals learn responsible AI, data, agents and storytelling, and build a working project each week. Fellows' projects are at [studio.terra.do/built](https://studio.terra.do/built?utm_source=github), and the Intensive is at [studio.terra.do](https://studio.terra.do/intensive?utm_source=github).
+
+[Project 3rd Rock](https://project3rdrock.com) is Bodhi Debnath's independent practice. It builds knowledge systems, AI editorial workflows, learning tools and interactive explainers for organisations working in climate and education.
+
+Made by [Bodhi Debnath](https://bodhithings.com), Head of Growth at Terra.do and founder of Project 3rd Rock.
