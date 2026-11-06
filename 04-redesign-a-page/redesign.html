@@ -1,0 +1,528 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>CO2 Trends Redesign</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&amp;display=swap">
+<style>
+/* Tokens: names and values from the brand system's tokens.css (Tailwind default theme),
+   plus the semantic aliases from its Tailwind theme board. Components below use tokens only. */
+:root {
+  --color-white: #ffffff;
+  --color-amber-50: #fffbeb;
+  --color-amber-100: #fef3c7;
+  --color-amber-300: #fcd34d;
+  --color-stone-200: #e7e5e4;
+  --color-teal-50: #f0fdfa;
+  --color-teal-100: #ccfbf1;
+  --color-teal-600: #0d9488;
+  --color-teal-700: #0f766e;
+  --color-teal-800: #115e59;
+  --color-teal-950: #042f2e;
+
+  --spacing-1: 0.25rem;
+  --spacing-2: 0.5rem;
+  --spacing-3: 0.75rem;
+  --spacing-4: 1rem;
+  --spacing-6: 1.5rem;
+  --spacing-8: 2rem;
+  --spacing-10: 2.5rem;
+  --spacing-12: 3rem;
+  --spacing-16: 4rem;
+  --spacing-18: 4.5rem;
+
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-5xl: 3rem;
+  --text-8xl: 6rem;
+
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-3xl: 1.5rem;
+  --radius-full: 9999px;
+
+  --font-sans: 'Bricolage Grotesque', system-ui, sans-serif;
+  --font-serif: 'Newsreader', Georgia, serif;
+
+  /* Semantic roles */
+  --color-ground: var(--color-amber-50);
+  --color-panel: var(--color-amber-100);
+  --color-ink: var(--color-teal-950);
+  --color-ink-soft: var(--color-teal-800);
+  --color-brand: var(--color-teal-700);
+  --color-tint: var(--color-teal-100);
+  --color-accent: var(--color-amber-300); /* reserved: the latest reading only */
+  --color-rule: var(--color-stone-200);
+  --spacing-gutter: var(--spacing-10);
+  --spacing-stack: var(--spacing-6);
+  --spacing-section: var(--spacing-16);
+  --radius-card: var(--radius-3xl);
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--color-ground); color: var(--color-ink); font-family: var(--font-sans); font-size: var(--text-base); line-height: 1.5; }
+a { color: var(--color-brand); font-weight: 600; text-underline-offset: 4px; }
+a:hover { color: var(--color-ink); }
+a:focus-visible { outline: 3px solid var(--color-ink); outline-offset: 3px; border-radius: var(--radius-lg); }
+h1, h2, h3, p, dl, dd, ul { margin: 0; padding: 0; }
+ul { list-style: none; }
+
+.wrap { width: 100%; max-width: 70rem; margin: 0 auto; padding: 0 var(--spacing-6); }
+.stack { display: flex; flex-direction: column; gap: var(--spacing-stack); }
+.row { display: flex; flex-wrap: wrap; gap: var(--spacing-gutter); }
+.row > * { flex: 1 1 18rem; min-width: 0; }
+
+.eyebrow { font-size: var(--text-base); letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; color: var(--color-ink-soft); }
+.lead { font-family: var(--font-serif); font-size: var(--text-2xl); line-height: 1.4; color: var(--color-ink-soft); max-width: 40rem; }
+.body { font-family: var(--font-serif); font-size: var(--text-lg); line-height: 1.55; color: var(--color-ink-soft); max-width: 40rem; }
+.h2 { font-size: var(--text-3xl); line-height: 1.15; font-weight: 800; letter-spacing: -0.03em; }
+
+/* Credit strip (top and bottom) */
+.credit { background: var(--color-ink); color: var(--color-teal-50); }
+.credit .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--spacing-2) var(--spacing-6); padding-top: var(--spacing-3); padding-bottom: var(--spacing-3); font-size: var(--text-base); font-weight: 600; }
+.credit a { color: var(--color-teal-50); }
+.credit a:hover { color: var(--color-tint); }
+.credit a:focus-visible { outline-color: var(--color-teal-50); }
+
+/* Nav */
+.nav { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--spacing-4); padding-top: var(--spacing-6); padding-bottom: var(--spacing-6); }
+.brand { display: flex; align-items: center; gap: var(--spacing-3); font-size: var(--text-2xl); font-weight: 800; letter-spacing: -0.03em; }
+.brand svg { flex-shrink: 0; }
+.nav ul { display: flex; flex-wrap: wrap; gap: var(--spacing-2) var(--spacing-6); font-size: var(--text-lg); }
+.nav a { display: inline-flex; align-items: center; min-height: 3rem; color: var(--color-ink); text-decoration: none; }
+.nav a:hover { color: var(--color-brand); text-decoration: underline; text-underline-offset: 6px; }
+
+/* Hero */
+.hero { padding-top: var(--spacing-8); padding-bottom: var(--spacing-section); }
+.hero h1 { font-size: var(--text-5xl); line-height: 1; font-weight: 800; letter-spacing: -0.04em; }
+@media (min-width: 48rem) { .hero h1 { font-size: var(--text-8xl); } }
+
+/* Latest reading panel: the only place the accent colour appears */
+.latest { background: var(--color-ink); color: var(--color-teal-50); border-radius: var(--radius-card); padding: var(--spacing-8); display: flex; flex-direction: column; gap: var(--spacing-6); }
+.latest .tag { align-self: flex-start; background: var(--color-accent); color: var(--color-ink); border-radius: var(--radius-full); padding: var(--spacing-1) var(--spacing-4); font-weight: 600; font-size: var(--text-base); }
+.latest .value { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--spacing-2) var(--spacing-4); }
+.latest .num { font-size: var(--text-5xl); line-height: 0.95; font-weight: 800; letter-spacing: -0.045em; color: var(--color-accent); }
+@media (min-width: 40rem) { .latest .num { font-size: var(--text-8xl); } }
+.latest .unit { font-size: var(--text-2xl); font-weight: 600; }
+.latest .when { font-family: var(--font-serif); font-size: var(--text-xl); }
+.latest .compare { display: flex; flex-wrap: wrap; gap: var(--spacing-6) var(--spacing-10); border-top: 1px solid var(--color-teal-800); padding-top: var(--spacing-6); }
+.latest dt { font-size: var(--text-base); color: var(--color-tint); }
+.latest dd { font-size: var(--text-2xl); font-weight: 800; letter-spacing: -0.02em; }
+
+/* Sections */
+.section { padding-top: var(--spacing-section); padding-bottom: var(--spacing-section); }
+.section.alt { background: var(--color-panel); }
+
+/* Interactive column charts */
+.chart { --plot-h: calc(var(--spacing-16) * 4); margin: 0; display: flex; flex-direction: column; gap: var(--spacing-3); }
+.chart-card { position: relative; background: var(--color-white); border: 1px solid var(--color-rule); border-radius: var(--radius-card); padding: var(--spacing-8) var(--spacing-6) var(--spacing-6); display: flex; flex-direction: column; gap: var(--spacing-4); }
+.chart-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--spacing-2) var(--spacing-6); font-weight: 600; }
+.legend { display: flex; flex-wrap: wrap; gap: var(--spacing-2) var(--spacing-6); }
+.legend span { display: inline-flex; align-items: center; gap: var(--spacing-2); }
+.sw { width: 1rem; height: 1rem; border-radius: var(--radius-sm); flex-shrink: 0; }
+.ml { --bar: var(--color-teal-700); }
+.gl { --bar: var(--color-teal-950); }
+.sw { background: var(--bar); }
+.plot { display: flex; gap: var(--spacing-3); padding-top: var(--spacing-8); }
+.yaxis { position: relative; flex: 0 0 1.5rem; height: var(--plot-h); }
+.ytick { position: absolute; right: 0; transform: translateY(50%); color: var(--color-ink-soft); }
+.main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: var(--spacing-2); }
+.area { position: relative; height: var(--plot-h); border-bottom: 2px solid var(--color-ink); display: flex; }
+.gridline { position: absolute; left: 0; right: 0; border-top: 1px solid var(--color-rule); }
+.grp { position: relative; flex: 1 1 0; min-width: 0; height: 100%; display: flex; justify-content: center; align-items: flex-end; gap: var(--spacing-3); }
+.bar { position: relative; flex: 0 1 4.5rem; min-width: 0; padding: 0; margin: 0; border: 0; border-radius: var(--radius-lg) var(--radius-lg) 0 0; background: var(--bar); cursor: pointer; font-family: inherit; }
+.bar:hover, .bar.on { outline: 3px solid var(--color-ink); outline-offset: 3px; }
+.bar:focus-visible { outline: 3px solid var(--color-ink); outline-offset: 3px; }
+.val { position: absolute; left: 50%; bottom: calc(100% + var(--spacing-1)); transform: translateX(-50%); font-size: var(--text-lg); font-weight: 800; color: var(--color-ink); white-space: nowrap; pointer-events: none; }
+.bar.has-err .val { bottom: calc(100% + var(--spacing-4)); }
+.err { position: absolute; left: 50%; width: 2px; margin-left: -1px; background: var(--color-ink); box-shadow: 0 0 0 1px var(--color-white); pointer-events: none; }
+.err::before, .err::after { content: ""; position: absolute; left: 50%; width: 0.75rem; margin-left: -0.375rem; height: 2px; background: var(--color-ink); box-shadow: 0 0 0 1px var(--color-white); }
+.err::before { top: 0; }
+.err::after { bottom: 0; }
+.xaxis { display: flex; font-weight: 600; }
+.xaxis span { flex: 1 1 0; min-width: 0; text-align: center; }
+.tip { position: absolute; z-index: 2; pointer-events: none; max-width: 15rem; background: var(--color-ink); color: var(--color-teal-50); border: 2px solid var(--color-teal-50); border-radius: var(--radius-xl); padding: var(--spacing-3) var(--spacing-4); line-height: 1.4; }
+.tip[hidden] { display: none; }
+.tip strong { display: block; font-size: var(--text-lg); }
+.hint { font-family: var(--font-serif); font-size: var(--text-lg); color: var(--color-ink-soft); }
+
+/* Line chart */
+.line { --plot-h: calc(var(--spacing-16) * 5); }
+.line .area, .line .xticks { margin-inline: var(--spacing-4); }
+.line .area { cursor: crosshair; touch-action: pan-y; }
+.line .area:focus-visible { outline: 3px solid var(--color-ink); outline-offset: 4px; border-radius: var(--radius-sm); }
+.line-svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.line-svg polyline { fill: none; stroke: var(--color-brand); stroke-width: 3; stroke-linejoin: round; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+.pt { position: absolute; width: 0.5rem; height: 0.5rem; margin: 0 0 -0.25rem -0.25rem; border-radius: var(--radius-full); background: var(--color-brand); pointer-events: none; }
+.pt.now { width: 1.25rem; height: 1.25rem; margin: 0 0 -0.625rem -0.625rem; background: var(--color-accent); border: 3px solid var(--color-ink); }
+.pt.sel { width: 1rem; height: 1rem; margin: 0 0 -0.5rem -0.5rem; background: var(--color-ink); outline: 3px solid var(--color-white); }
+.pt.now.sel { width: 1.25rem; height: 1.25rem; margin: 0 0 -0.625rem -0.625rem; background: var(--color-accent); outline: 3px solid var(--color-ink); }
+.guide { position: absolute; top: 0; bottom: 0; width: 2px; margin-left: -1px; background: var(--color-ink); pointer-events: none; }
+.guide[hidden] { display: none; }
+.nowlabel { position: absolute; transform: translateX(-100%); margin-left: var(--spacing-3); font-size: var(--text-lg); font-weight: 800; white-space: nowrap; pointer-events: none; }
+.xticks { position: relative; height: 1.5rem; font-weight: 600; }
+.xticks span { position: absolute; transform: translateX(-50%); }
+@media (max-width: 30rem) { .xticks span:nth-child(even) { display: none; } }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Stat cards */
+.card { background: var(--color-white); border: 1px solid var(--color-rule); border-radius: var(--radius-card); padding: var(--spacing-8); display: flex; flex-direction: column; gap: var(--spacing-3); }
+.card .big { font-size: var(--text-5xl); line-height: 1; font-weight: 800; letter-spacing: -0.04em; color: var(--color-ink); }
+.card .big small { font-size: var(--text-xl); font-weight: 600; letter-spacing: 0; color: var(--color-ink-soft); }
+
+/* Notice */
+.notice { background: var(--color-tint); border-radius: var(--radius-xl); padding: var(--spacing-6); display: flex; gap: var(--spacing-4); align-items: flex-start; }
+.notice h3 { font-size: var(--text-lg); font-weight: 600; }
+.notice p { font-family: var(--font-serif); font-size: var(--text-lg); line-height: 1.5; color: var(--color-ink); }
+
+footer .credit .wrap { padding-top: var(--spacing-6); padding-bottom: var(--spacing-6); }
+</style>
+
+<div class="credit" role="note">
+  <div class="wrap">
+    <span>Redesign concept · Data: NOAA Global Monitoring Laboratory</span>
+    <span>Design-system illustration. Not an official NOAA page.</span>
+  </div>
+</div>
+
+<div class="wrap">
+  <header class="nav">
+    <div class="brand">
+      <svg width="36" height="36" viewBox="0 0 64 64" aria-hidden="true"><circle cx="13" cy="32" r="11" fill="#0f766e"/><circle cx="32" cy="32" r="13" fill="#042f2e"/><circle cx="51" cy="32" r="11" fill="#0f766e"/></svg>
+      <span>Trends in CO<sub>2</sub></span>
+    </div>
+    <nav aria-label="Page sections">
+      <ul>
+        <li><a href="#latest">Latest reading</a></li>
+        <li><a href="#history">Since 2021</a></li>
+        <li><a href="#growth">Growth rate</a></li>
+        <li><a href="#about">About the data</a></li>
+      </ul>
+    </nav>
+  </header>
+</div>
+
+<main>
+  <section class="wrap hero" id="latest" aria-labelledby="title">
+    <div class="row">
+      <div class="stack" style="justify-content: center">
+        <p class="eyebrow">Mauna Loa Observatory, Hawaii</p>
+        <h1 id="title">Carbon dioxide in the air, now.</h1>
+        <p class="lead">The monthly average at Mauna Loa, in parts per million. It is still climbing.</p>
+      </div>
+      <div class="latest">
+        <span class="tag">Latest reading</span>
+        <div class="value">
+          <span class="num">426.07</span>
+          <span class="unit">ppm</span>
+        </div>
+        <p class="when">Monthly mean, September 2026</p>
+        <dl class="compare">
+          <div>
+            <dt>September 2025</dt>
+            <dd>424.37 ppm</dd>
+          </div>
+          <div>
+            <dt>Change in a year</dt>
+            <dd>+1.70 ppm</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="history" aria-labelledby="history-h">
+    <div class="wrap row">
+      <div class="stack">
+        <p class="eyebrow">Monthly mean since 2021</p>
+        <h2 class="h2" id="history-h">A rising line with a yearly rhythm.</h2>
+        <p class="body">Each point is one monthly mean at Mauna Loa. Plants take up CO<sub>2</sub> in the northern summer, so readings peak in May and fall to a low in September or October. The climb underneath keeps going.</p>
+      </div>
+      <figure class="chart" id="chart-line">
+        <div class="chart-card"></div>
+        <figcaption class="body">Monthly mean CO<sub>2</sub> at Mauna Loa, January 2021 to September 2026. Points are read from NOAA's published chart, to about 0.1 ppm. The September 2025 and September 2026 values are NOAA's stated figures.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section alt" id="growth" aria-labelledby="growth-h">
+    <div class="wrap row">
+      <div class="stack">
+        <p class="eyebrow">Annual growth rate</p>
+        <h2 class="h2" id="growth-h">Growth slowed in 2025, but CO<sub>2</sub> still rose.</h2>
+        <p class="body">The annual growth rate is the change in concentration from January to December. After two years above 3.3 ppm, 2025 came in at 2.23 ppm.</p>
+      </div>
+      <figure class="chart" id="chart-growth">
+        <div class="chart-card"></div>
+        <figcaption class="body">Mauna Loa growth rate in ppm per year. Hover, tap or tab a column for detail. The line on 2025 shows its 0.11 ppm uncertainty.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section" id="about" aria-labelledby="about-h">
+    <div class="wrap stack">
+      <p class="eyebrow">Beyond Mauna Loa</p>
+      <h2 class="h2" id="about-h">The global picture agrees.</h2>
+      <figure class="chart" id="chart-global">
+        <div class="chart-card"></div>
+        <figcaption class="body">Yearly increase in CO<sub>2</sub>, Mauna Loa against the global surface average. NOAA defines the two measures a little differently. Compare the pattern.</figcaption>
+      </figure>
+      <div class="row">
+        <article class="card">
+          <p class="big">425.6 <small>ppm</small></p>
+          <p class="body">Global surface average for 2025, give or take 0.1 ppm.</p>
+        </article>
+        <article class="card">
+          <p class="big">+2.3 <small>ppm</small></p>
+          <p class="body">Global increase in 2025, down from +3.7 ppm in 2024.</p>
+        </article>
+      </div>
+      <div class="notice">
+        <svg width="28" height="28" viewBox="0 0 64 64" aria-hidden="true" style="flex-shrink: 0"><circle cx="13" cy="32" r="11" fill="#0f766e"/><circle cx="32" cy="32" r="13" fill="#042f2e"/><circle cx="51" cy="32" r="11" fill="#0f766e"/></svg>
+        <div class="stack" style="gap: var(--spacing-1)">
+          <h3>Read the numbers with care</h3>
+          <p>The last year of data is preliminary, pending recalibration of reference gases and other quality checks. After the 2022 eruption, measurements moved to a nearby site. Readings from December 2022 to 4 July 2023 come from the Maunakea Observatories. NOAA last updated its page on 9 October 2026.</p>
+        </div>
+      </div>
+      <p class="body">The full NOAA page is at <a href="https://gml.noaa.gov/ccgg/trends/">gml.noaa.gov/ccgg/trends</a>. It holds the monthly, daily and weekly series and the data files.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="credit" role="contentinfo">
+  <div class="wrap">
+    <span>Redesign concept · Data: NOAA Global Monitoring Laboratory</span>
+    <span>Public NOAA data. Figures as published. The September 2026 value is preliminary.</span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var charts = [
+    { id: 'chart-growth', label: 'Mauna Loa annual growth rate', max: 4, unit: 'ppm per year',
+      series: [{ key: 'ml', name: 'Mauna Loa' }],
+      groups: [
+        { label: '2023', bars: [{ s: 'ml', v: 3.32, d: 2 }] },
+        { label: '2024', bars: [{ s: 'ml', v: 3.33, d: 2 }] },
+        { label: '2025', bars: [{ s: 'ml', v: 2.23, d: 2, err: 0.11 }] }
+      ] },
+    { id: 'chart-global', label: 'Yearly CO2 increase, Mauna Loa and global', max: 4, unit: 'ppm per year',
+      series: [{ key: 'ml', name: 'Mauna Loa growth rate' }, { key: 'gl', name: 'Global increase' }],
+      groups: [
+        { label: '2024', bars: [{ s: 'ml', v: 3.33, d: 2 }, { s: 'gl', v: 3.7, d: 1 }] },
+        { label: '2025', bars: [{ s: 'ml', v: 2.23, d: 2, err: 0.11 }, { s: 'gl', v: 2.3, d: 1 }] }
+      ] }
+  ];
+
+  function el(tag, cls, html) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (html != null) e.innerHTML = html;
+    return e;
+  }
+
+  function build(cfg) {
+    var card = document.querySelector('#' + cfg.id + ' .chart-card');
+    var names = {};
+    cfg.series.forEach(function (s) { names[s.key] = s.name; });
+    card.setAttribute('role', 'group');
+    card.setAttribute('aria-label', cfg.label);
+
+    var head = el('div', 'chart-head');
+    head.appendChild(el('span', null, cfg.unit));
+    var legend = el('div', 'legend');
+    if (cfg.series.length > 1) {
+      cfg.series.forEach(function (s) {
+        legend.appendChild(el('span', null, '<i class="sw ' + s.key + '"></i>' + s.name));
+      });
+      head.appendChild(legend);
+    }
+    card.appendChild(head);
+
+    var plot = el('div', 'plot');
+    var yaxis = el('div', 'yaxis');
+    var main = el('div', 'main');
+    var area = el('div', 'area');
+    for (var t = 0; t <= cfg.max; t++) {
+      var pct = (t / cfg.max) * 100;
+      yaxis.appendChild(el('span', 'ytick', t)).style.bottom = pct + '%';
+      if (t > 0) area.appendChild(el('div', 'gridline')).style.bottom = pct + '%';
+    }
+
+    var tip = el('div', 'tip');
+    tip.hidden = true;
+    tip.setAttribute('role', 'tooltip');
+
+    function show(bar) {
+      var c = card.getBoundingClientRect(), b = bar.getBoundingClientRect();
+      tip.innerHTML = bar._html;
+      tip.hidden = false;
+      var w = tip.offsetWidth, h = tip.offsetHeight;
+      var left = b.left - c.left + b.width / 2 - w / 2;
+      tip.style.left = Math.max(0, Math.min(left, c.width - w)) + 'px';
+      tip.style.top = Math.max(0, b.bottom - c.top - h - 12) + 'px';
+      bar.classList.add('on');
+    }
+    function hide(bar) { tip.hidden = true; bar.classList.remove('on'); }
+
+    var previous = {};
+    cfg.groups.forEach(function (g) {
+      var grp = el('div', 'grp');
+      g.bars.forEach(function (b) {
+        var btn = el('button', 'bar ' + b.s + (b.err ? ' has-err' : ''));
+        btn.type = 'button';
+        btn.style.height = (b.v / cfg.max) * 100 + '%';
+        var value = b.v.toFixed(b.d);
+        btn.appendChild(el('span', 'val', value));
+        if (b.err) {
+          var err = el('span', 'err');
+          err.style.height = (2 * b.err / b.v) * 100 + '%';
+          err.style.top = (-b.err / b.v) * 100 + '%';
+          btn.appendChild(err);
+        }
+        var html = '<strong>' + g.label + ': ' + value + ' ppm</strong>' + names[b.s];
+        if (b.err) html += '<br>Uncertainty ±' + b.err;
+        var prev = previous[b.s];
+        if (prev != null) {
+          var diff = b.v - prev;
+          html += '<br>' + Math.abs(diff).toFixed(b.d) + ' ppm ' + (diff < 0 ? 'lower' : 'higher') + ' than the year before';
+        }
+        previous[b.s] = b.v;
+        btn._html = html;
+        btn.setAttribute('aria-label', g.label + ', ' + names[b.s] + ', ' + value + ' ppm per year');
+        btn.addEventListener('mouseenter', function () { show(btn); });
+        btn.addEventListener('mouseleave', function () { hide(btn); });
+        btn.addEventListener('focus', function () { show(btn); });
+        btn.addEventListener('blur', function () { hide(btn); });
+        btn.addEventListener('keydown', function (e) { if (e.key === 'Escape') hide(btn); });
+        grp.appendChild(btn);
+      });
+      area.appendChild(grp);
+    });
+
+    var xaxis = el('div', 'xaxis');
+    cfg.groups.forEach(function (g) { xaxis.appendChild(el('span', null, g.label)); });
+    main.appendChild(area);
+    main.appendChild(xaxis);
+    plot.appendChild(yaxis);
+    plot.appendChild(main);
+    card.appendChild(plot);
+    card.appendChild(tip);
+  }
+
+  charts.forEach(build);
+})();
+</script>
+
+<script>
+(function () {
+  var vals = [415.5, 416.7, 417.6, 419.0, 419.1, 418.9, 416.9, 414.4, 413.3, 413.9, 415.0, 416.7, 418.1, 419.3, 418.8, 420.2, 421.0, 420.9, 418.8, 417.2, 415.9, 415.7, 417.5, 419.0, 419.5, 420.3, 421.0, 423.3, 424.0, 423.7, 421.8, 419.7, 418.5, 418.8, 420.5, 421.8, 422.8, 424.6, 425.4, 426.5, 426.9, 426.9, 425.6, 423.0, 422.0, 422.4, 423.8, 425.4, 426.7, 427.1, 428.1, 429.6, 430.5, 429.6, 427.9, 425.5, 424.37, 424.9, 426.5, 427.5, 428.6, 429.3, 430.1, 431.1, 432.3, 431.4, 429.1, 427.6, 426.07];
+  var exact = { 56: 2, 68: 2 };
+  var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  var X0 = 2020.9, X1 = 2026.9, Y0 = 412, Y1 = 433, last = vals.length - 1;
+  var card = document.querySelector('#chart-line .chart-card');
+  function el(tag, cls, html) { var e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; }
+  function t(i) { return 2021 + (i + 0.5) / 12; }
+  function px(i) { return ((t(i) - X0) / (X1 - X0)) * 100; }
+  function py(v) { return ((v - Y0) / (Y1 - Y0)) * 100; }
+  function fmt(i) { return vals[i].toFixed(exact[i] || 1); }
+  function name(i) { return months[i % 12] + ' ' + (2021 + Math.floor(i / 12)); }
+
+  card.setAttribute('role', 'group');
+  card.setAttribute('aria-label', 'Monthly mean CO2 at Mauna Loa, January 2021 to September 2026');
+  card.classList.add('line');
+  card.appendChild(el('div', 'chart-head', '<span>ppm, axis starts at 412</span><span>Hover, or focus and use the arrow keys</span>'));
+
+  var plot = el('div', 'plot'), yaxis = el('div', 'yaxis'), main = el('div', 'main'), area = el('div', 'area');
+  [415, 420, 425, 430].forEach(function (v) {
+    yaxis.appendChild(el('span', 'ytick', v)).style.bottom = py(v) + '%';
+    area.appendChild(el('div', 'gridline')).style.bottom = py(v) + '%';
+  });
+  yaxis.style.flexBasis = '2.5rem';
+
+  var ns = 'http://www.w3.org/2000/svg';
+  var svg = document.createElementNS(ns, 'svg');
+  svg.setAttribute('class', 'line-svg');
+  svg.setAttribute('viewBox', '0 0 100 100');
+  svg.setAttribute('preserveAspectRatio', 'none');
+  svg.setAttribute('aria-hidden', 'true');
+  var line = document.createElementNS(ns, 'polyline');
+  line.setAttribute('points', vals.map(function (v, i) { return px(i) + ',' + (100 - py(v)); }).join(' '));
+  svg.appendChild(line);
+  area.appendChild(svg);
+
+  var guide = el('div', 'guide'); guide.hidden = true; area.appendChild(guide);
+  var pts = vals.map(function (v, i) {
+    var d = el('span', 'pt' + (i === last ? ' now' : ''));
+    d.style.left = px(i) + '%'; d.style.bottom = py(v) + '%';
+    area.appendChild(d); return d;
+  });
+  var nl = el('span', 'nowlabel', fmt(last) + ' ppm');
+  nl.style.left = px(last) + '%'; nl.style.bottom = 'calc(' + py(vals[last]) + '% - 2.75rem)';
+  area.appendChild(nl);
+
+  var tip = el('div', 'tip'); tip.hidden = true; tip.setAttribute('role', 'tooltip');
+  var live = el('div', 'sr'); live.setAttribute('aria-live', 'polite');
+  area.tabIndex = 0;
+  area.setAttribute('role', 'group');
+  area.setAttribute('aria-label', 'Monthly values. Use the left and right arrow keys to move between months.');
+
+  var cur = -1;
+  function select(i) {
+    if (i === cur) return;
+    if (cur >= 0) pts[cur].classList.remove('sel');
+    cur = i;
+    pts[i].classList.add('sel');
+    guide.hidden = false; guide.style.left = px(i) + '%';
+    var html = '<strong>' + name(i) + ': ' + fmt(i) + ' ppm</strong>Monthly mean';
+    var txt = name(i) + ', ' + fmt(i) + ' ppm';
+    if (i >= 12) {
+      var d = vals[i] - vals[i - 12];
+      var line2 = Math.abs(d).toFixed(exact[i] && exact[i - 12] ? 2 : 1) + ' ppm ' + (d < 0 ? 'lower' : 'higher') + ' than ' + name(i - 12);
+      html += '<br>' + line2; txt += ', ' + line2;
+    }
+    tip.innerHTML = html; tip.hidden = false; live.textContent = txt;
+    var c = card.getBoundingClientRect(), b = pts[i].getBoundingClientRect();
+    var w = tip.offsetWidth, h = tip.offsetHeight;
+    tip.style.left = Math.max(0, Math.min(b.left - c.left + b.width / 2 - w / 2, c.width - w)) + 'px';
+    var ar = area.getBoundingClientRect();
+    tip.style.top = (py(vals[i]) > 50 ? ar.bottom - c.top - h - 8 : ar.top - c.top + 8) + 'px';
+  }
+  function clear() {
+    if (cur >= 0) pts[cur].classList.remove('sel');
+    cur = -1; guide.hidden = true; tip.hidden = true;
+  }
+  function nearest(clientX) {
+    var r = area.getBoundingClientRect(), x = (clientX - r.left) / r.width * 100, best = 0, bd = 1e9;
+    for (var i = 0; i <= last; i++) { var dd = Math.abs(px(i) - x); if (dd < bd) { bd = dd; best = i; } }
+    return best;
+  }
+  area.addEventListener('pointermove', function (e) { select(nearest(e.clientX)); });
+  area.addEventListener('pointerdown', function (e) { select(nearest(e.clientX)); });
+  area.addEventListener('pointerleave', function () { if (document.activeElement !== area) clear(); });
+  area.addEventListener('focus', function () { if (cur < 0) select(last); });
+  area.addEventListener('blur', clear);
+  area.addEventListener('keydown', function (e) {
+    var n = cur < 0 ? last : cur;
+    if (e.key === 'ArrowLeft') n = Math.max(0, n - 1);
+    else if (e.key === 'ArrowRight') n = Math.min(last, n + 1);
+    else if (e.key === 'ArrowUp') n = Math.min(last, n + 12);
+    else if (e.key === 'ArrowDown') n = Math.max(0, n - 12);
+    else if (e.key === 'Home') n = 0;
+    else if (e.key === 'End') n = last;
+    else if (e.key === 'Escape') { clear(); return; }
+    else return;
+    e.preventDefault(); select(n);
+  });
+
+  var xt = el('div', 'xticks');
+  for (var y = 2021; y <= 2026; y++) xt.appendChild(el('span', null, y)).style.left = ((y - X0) / (X1 - X0)) * 100 + '%';
+  main.appendChild(area); main.appendChild(xt);
+  plot.appendChild(yaxis); plot.appendChild(main);
+  card.appendChild(plot); card.appendChild(tip); card.appendChild(live);
+})();
+</script>
+
+
+</body></html>

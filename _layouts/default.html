@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+{% include head.html %}
+</head>
+<body>
+{% include nav.html %}
+{% assign step = nil %}{% assign n = 0 %}
+{% for s in site.data.steps %}{% assign d = '/' | append: s.dir | append: '/' %}{% if page.dir == d %}{% assign step = s %}{% assign n = forloop.index %}{% endif %}{% endfor %}
+<main>
+  <section class="hero page">
+    <div class="container">
+      {% if step %}
+      <p class="eyebrow">Step {{ n }} of {{ site.data.steps.size }} <span>· {{ step.tools }}</span></p>
+      <h1>{{ step.title }}</h1>
+      {% else %}
+      <p class="eyebrow"><a href="{{ '/' | relative_url }}">Claude Design for climate</a></p>
+      <h1>{{ page.title | default: site.title }}</h1>
+      {% endif %}
+    </div>
+  </section>
+  <div class="container page-body">
+    <article class="prose">
+{{ content }}
+    </article>
+  </div>
+</main>
+{% include footer.html %}
+</body>
+</html>

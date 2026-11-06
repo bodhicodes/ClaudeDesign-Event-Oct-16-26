@@ -1,0 +1,633 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Claude Design for Climate and Impact Work</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: six full-height slides that scale to a half-screen browser window. Single committed dark look, matching the Terra Studio Intensive page: charcoal ground with a warm and teal haze, mint actions, lavender and butter cards. */
+:root {
+  --bg: #1C1D20;
+  --bg-2: #25272B;
+  --line: #3A3D42;
+  --fg: #F4F4F2;
+  --fg-2: #F4F4F2;
+  --fg-3: #E6E7E4;
+  --mint: #A9DCC1;
+  --mint-ink: #12301F;
+  --lav: #E3E2F8;
+  --butter: #F6F2C2;
+  --card-ink: #1C1D20;
+  --card-ink-2: #26282C;
+  --haze-warm: rgba(150, 70, 70, 0.30);
+  --haze-cool: rgba(60, 120, 115, 0.22);
+  --sans: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  color-scheme: dark;
+}
+html, body { height: 100%; }
+body { background: var(--bg); color: var(--fg); font-family: var(--sans); overflow: hidden; }
+
+.deck { height: 100%; overflow-y: auto; scroll-snap-type: y mandatory; scrollbar-width: none; }
+.deck::-webkit-scrollbar { display: none; }
+
+.slide {
+  height: 100%;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  container-type: size;
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(60% 55% at 12% 0%, var(--haze-warm), transparent 70%),
+    radial-gradient(55% 50% at 95% 100%, var(--haze-cool), transparent 70%),
+    var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+.inner {
+  --u: min(1cqi, 1.3cqb);
+  height: 100%;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  box-sizing: border-box;
+  padding-block: calc(var(--u) * 6) calc(var(--u) * 9);
+  padding-left: max(16px, calc(var(--u) * 6.5), env(safe-area-inset-left, 0px));
+  padding-right: max(16px, calc(var(--u) * 6.5), env(safe-area-inset-right, 0px));
+  display: flex;
+  flex-direction: column;
+  justify-content: safe center;
+  gap: calc(var(--u) * 3);
+  max-width: 1300px;
+  margin-inline: auto;
+}
+
+.brand { font-family: var(--mono); font-size: max(11px, calc(var(--u) * 1.4)); letter-spacing: 0.12em; text-transform: uppercase; color: var(--fg-2); display: flex; align-items: center; gap: 0.6em; margin: 0; }
+.brand i { width: 0.9em; height: 0.9em; border-radius: 50%; background: var(--mint); display: inline-block; }
+
+.eyebrow { font-family: var(--mono); font-size: max(11px, calc(var(--u) * 1.45)); letter-spacing: 0.14em; text-transform: uppercase; color: var(--mint); margin: 0; display: flex; flex-wrap: wrap; gap: 0.4em 1.2em; }
+.eyebrow span { color: var(--fg-3); }
+
+h1, h2 { font-weight: 700; margin: 0; letter-spacing: -0.025em; text-wrap: balance; }
+h1 { font-size: max(32px, calc(var(--u) * 7.6)); line-height: 1.0; }
+h2 { font-size: max(28px, calc(var(--u) * 5.8)); line-height: 1.02; }
+.lede { font-size: max(16px, calc(var(--u) * 2.3)); line-height: 1.45; color: var(--fg); max-width: 38ch; margin: 0; text-wrap: pretty; }
+
+/* Cover */
+.meta { display: flex; flex-wrap: wrap; gap: calc(var(--u) * 1) calc(var(--u) * 4); font-family: var(--mono); font-size: max(11px, calc(var(--u) * 1.4)); letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg); border-top: 1px solid var(--line); padding-top: calc(var(--u) * 2.2); }
+.meta b { color: var(--fg); font-weight: 500; }
+.chat { align-self: flex-start; display: flex; align-items: center; gap: 0.7em; background: var(--mint); color: var(--mint-ink); font-weight: 500; font-size: max(15px, calc(var(--u) * 2.1)); padding: 0.7em 1.1em; border-radius: 999px; }
+.chat .mono { font-family: var(--mono); font-size: 0.72em; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.75; }
+
+/* Chart pair */
+.pair { display: grid; grid-template-columns: 1fr 1fr; gap: calc(var(--u) * 2.4); }
+.pair figure { margin: 0; min-width: 0; display: flex; flex-direction: column; gap: calc(var(--u) * 1); }
+.pair svg { width: 100%; max-width: 100%; height: auto; display: block; border-radius: calc(var(--u) * 1); }
+.pair figcaption { font-family: var(--mono); font-size: max(11px, calc(var(--u) * 1.3)); letter-spacing: 0.12em; text-transform: uppercase; color: var(--fg); }
+.pair svg { max-height: 34cqb; aspect-ratio: 600 / 340; width: 100%; height: auto; object-fit: contain; }
+.pair figure { align-items: center; }
+
+/* Step slides */
+.cols { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: calc(var(--u) * 2.2); }
+@container (max-aspect-ratio: 1/1) { .cols { grid-template-columns: 1fr; } }
+.card { border-radius: calc(var(--u) * 1.2); padding: calc(var(--u) * 2.6); display: flex; flex-direction: column; gap: calc(var(--u) * 1.4); color: var(--card-ink); min-width: 0; }
+.card.lav { background: var(--lav); }
+.card.butter { background: var(--butter); }
+.card.dark { background: var(--bg-2); border: 1px solid var(--line); color: var(--fg); }
+.card .k { font-family: var(--mono); font-size: max(10px, calc(var(--u) * 1.25)); letter-spacing: 0.14em; text-transform: uppercase; color: var(--card-ink-2); }
+.card.dark .k { color: var(--fg-3); }
+.card ol, .card ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: calc(var(--u) * 1.1); }
+.card li { font-size: max(15px, calc(var(--u) * 2)); line-height: 1.35; display: grid; grid-template-columns: 2.2ch minmax(0, 1fr); gap: 0.6em; }
+.card ol { counter-reset: s; }
+.card ol li { counter-increment: s; }
+.card ol li::before { content: counter(s); font-family: var(--mono); font-size: 0.8em; color: var(--card-ink-2); padding-top: 0.12em; }
+.card ul li::before { content: "·"; font-weight: 700; color: var(--card-ink-2); }
+.card li b { font-weight: 700; }
+.card p { margin: 0; font-size: max(14px, calc(var(--u) * 1.75)); line-height: 1.45; color: var(--card-ink-2); }
+.card.dark p { color: var(--fg-2); }
+.card a, .links a { font-family: var(--mono); font-size: max(11px, calc(var(--u) * 1.3)); color: inherit; text-decoration: underline; text-underline-offset: 3px; overflow-wrap: anywhere; }
+.card.dark a { color: var(--mint); }
+
+.prompt { margin: 0; white-space: pre-wrap; font-family: var(--mono); font-size: max(12px, calc(var(--u) * 1.6)); line-height: 1.6; color: var(--card-ink); }
+.prompt mark { background: rgba(28, 29, 32, 0.12); color: var(--card-ink); padding: 0 0.25em; border-radius: 3px; }
+.copy { align-self: flex-start; font: 500 max(12px, calc(var(--u) * 1.5)) var(--sans); background: var(--card-ink); color: var(--butter); border: 0; border-radius: 999px; padding: 0.55em 1em; cursor: pointer; }
+
+.qs { display: flex; align-items: center; gap: 0.7em; font-size: max(14px, calc(var(--u) * 1.8)); color: var(--fg-2); border-top: 1px solid var(--line); padding-top: calc(var(--u) * 1.8); margin: 0; }
+.qs b { color: var(--fg); font-weight: 500; }
+.qs i { width: 0.55em; height: 0.55em; border-radius: 50%; background: var(--mint); display: inline-block; flex: none; }
+
+/* Prompt table */
+.inner.tall { justify-content: safe center; }
+.ptabs { display: flex; flex-wrap: wrap; gap: calc(var(--u) * 0.8); }
+.ptabs button { font: 500 max(14px, calc(var(--u) * 1.7)) var(--sans); background: var(--bg-2); color: var(--fg); border: 1px solid var(--line); border-radius: 999px; padding: 0.5em 1.1em; cursor: pointer; }
+.ptabs button[aria-selected="true"] { background: var(--mint); color: var(--mint-ink); border-color: var(--mint); }
+.pp .prompt { max-height: 28cqb; overflow-y: auto; }
+.mpanel { max-height: 58cqb; overflow-y: auto; }
+.mvideo { display: block; width: 100%; max-width: 100%; max-height: 36cqb; aspect-ratio: 16 / 9; object-fit: contain; background: #000; border-radius: 8px; }
+.mpanel ol li::before { color: var(--mint); }
+.mpanel li { color: var(--fg); }
+.mpanel .prompt.code { color: var(--fg); background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 0.8em 1em; overflow-x: auto; white-space: pre; }
+.mpanel .copy { background: var(--mint); color: var(--mint-ink); }
+.ptabs.sub button { font-size: max(12px, calc(var(--u) * 1.4)); padding: 0.4em 0.9em; }
+.kpanel { display: flex; flex-direction: column; gap: calc(var(--u) * 1); }
+.kpanel .prompt { color: var(--fg); background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 0.8em 1em; max-height: 24cqb; overflow: auto; font-size: max(12px, calc(var(--u) * 1.35)); }
+.kpanel .kwhat { color: var(--fg); }
+a.inline { color: var(--mint); text-decoration: underline; text-underline-offset: 3px; }
+.ptable { display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: calc(var(--u) * 1.2); overflow: hidden; }
+.prow { display: grid; grid-template-columns: 4ch minmax(0, 1fr) minmax(0, 14ch); gap: calc(var(--u) * 1.8); padding: calc(var(--u) * 1.6) calc(var(--u) * 2); border-top: 1px solid var(--line); align-items: start; background: var(--bg-2); }
+.prow { border-top: 0; }
+.phead { background: var(--bg); font-family: var(--mono); font-size: max(11px, calc(var(--u) * 1.2)); letter-spacing: 0.14em; text-transform: uppercase; color: var(--fg); padding-block: calc(var(--u) * 1.1); }
+.pn { font-family: var(--mono); font-size: max(16px, calc(var(--u) * 2.2)); color: var(--mint); }
+.pp { display: flex; flex-direction: column; gap: calc(var(--u) * 0.9); min-width: 0; }
+.pp .prompt { color: var(--fg); font-size: max(12px, calc(var(--u) * 1.35)); line-height: 1.55; }
+.pp .prompt mark { background: rgba(169, 220, 193, 0.2); color: var(--fg); }
+.pp .copy { background: var(--mint); color: var(--mint-ink); padding: 0.4em 0.9em; }
+.pw { font-size: max(14px, calc(var(--u) * 1.6)); line-height: 1.4; color: var(--fg); }
+@container (max-width: 640px) {
+  .prow { grid-template-columns: 3ch minmax(0, 1fr); }
+  .pw { grid-column: 2; }
+  .phead span:last-child { display: none; }
+}
+
+/* Motion trio */
+.trio { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: calc(var(--u) * 1.8); }
+.card h3.planet { margin: 0; font-size: max(20px, calc(var(--u) * 3)); line-height: 1.05; letter-spacing: -0.02em; font-weight: 700; color: var(--fg); }
+.trio .card h3 { margin: 0; font-size: max(18px, calc(var(--u) * 2.6)); line-height: 1.1; letter-spacing: -0.015em; font-weight: 700; }
+@container (max-aspect-ratio: 1/1) { .trio { grid-template-columns: 1fr; gap: calc(var(--u) * 1.4); } }
+
+/* Studio */
+.facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: calc(var(--u) * 1.2); overflow: hidden; }
+.facts div { background: var(--bg-2); padding: calc(var(--u) * 2); display: flex; flex-direction: column; gap: calc(var(--u) * 0.5); min-width: 0; }
+.facts .k { font-family: var(--mono); font-size: max(10px, calc(var(--u) * 1.2)); letter-spacing: 0.14em; text-transform: uppercase; color: var(--fg-3); }
+.facts b { font-size: max(20px, calc(var(--u) * 3.2)); font-weight: 700; letter-spacing: -0.02em; line-height: 1.05; font-variant-numeric: tabular-nums; }
+.facts .hot b { color: var(--mint); }
+.facts small { font-size: max(12px, calc(var(--u) * 1.4)); color: var(--fg-2); line-height: 1.35; }
+.facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.facts .learn { grid-column: 1 / -1; }
+.tags { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: calc(var(--u) * 0.8); }
+.tags li { font-size: max(13px, calc(var(--u) * 1.7)); font-weight: 500; color: var(--fg); border: 1px solid var(--line); border-radius: 999px; padding: 0.35em 0.85em; }
+.apply { align-self: flex-start; display: inline-flex; align-items: center; gap: 0.6em; background: var(--mint); color: var(--mint-ink); font-weight: 700; font-size: max(15px, calc(var(--u) * 2)); padding: 0.75em 1.3em; border-radius: 999px; text-decoration: none; }
+.row { display: flex; flex-wrap: wrap; align-items: center; gap: calc(var(--u) * 1.4) calc(var(--u) * 3); }
+.links { display: flex; flex-wrap: wrap; gap: calc(var(--u) * 0.8) calc(var(--u) * 2.4); color: var(--fg-2); }
+
+/* Skill viewer */
+.skill-open { align-self: flex-start; font: 500 max(13px, calc(var(--u) * 1.6)) var(--mono); letter-spacing: 0.04em; background: transparent; color: var(--mint); border: 1px solid var(--mint); border-radius: 999px; padding: 0.55em 1.1em; cursor: pointer; }
+.skill-overlay { position: fixed; inset: 0; z-index: 20; background: rgba(12, 13, 15, 0.82); display: flex; align-items: center; justify-content: center; padding-block: max(16px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-bottom, 0px)); padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.skill-panel { width: 100%; max-width: 760px; max-height: 100%; display: flex; flex-direction: column; background: var(--bg-2); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+.skill-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 18px; border-bottom: 1px solid var(--line); }
+.skill-head .k { font-family: var(--mono); font-size: 13px; color: var(--fg); overflow-wrap: anywhere; }
+.skill-head button { font: 500 14px var(--sans); background: var(--mint); color: var(--mint-ink); border: 0; border-radius: 999px; padding: 6px 14px; cursor: pointer; }
+.skill-body { overflow-y: auto; padding: 20px 24px 28px; display: flex; flex-direction: column; gap: 10px; font-family: var(--mono); color: var(--fg); }
+.skill-body h3 { margin: 0; font-size: 20px; color: var(--mint); }
+.skill-body h4 { margin: 10px 0 0; font-size: 16px; color: var(--butter); font-weight: 500; }
+.skill-body p { margin: 0; font-size: 16px; line-height: 1.55; }
+.skill-body .code { background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: 10px 12px; }
+
+/* Nav */
+.nav { position: fixed; left: 0; right: 0; bottom: 0; z-index: 5; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 10px calc(10px + env(safe-area-inset-bottom, 0px)); padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--fg-3); pointer-events: none; }
+.nav > * { pointer-events: auto; }
+.nav .ctrls { display: flex; align-items: center; gap: 6px; }
+.nav button { font: inherit; letter-spacing: 0; width: 32px; height: 32px; border: 1px solid var(--line); background: var(--bg-2); color: var(--fg); border-radius: 50%; cursor: pointer; }
+.nav .count { min-width: 5ch; text-align: right; font-variant-numeric: tabular-nums; }
+.progress { position: fixed; left: 0; top: 0; height: 3px; background: var(--mint); width: 0; z-index: 6; transition: width .3s ease; }
+
+button:focus-visible, a:focus-visible { outline: 2px solid var(--mint); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { .progress { transition: none; } }
+</style>
+
+<div class="progress" id="progress"></div>
+
+<main class="deck" id="deck">
+
+  <section class="slide" aria-label="Title">
+    <div class="inner">
+      <p class="brand"><i aria-hidden="true"></i>Terra Studio · Build With Us</p>
+      <h1>Claude Design for climate and impact work</h1>
+      <p class="lede">We'll set up a design system, add our build rules, use them to redesign a real climate page, build it in Claude Code, and then make it move.</p>
+      <div class="meta"><span><b>Bodhi Debnath</b> · Head of Growth, Terra.do</span><span>16 Oct 2026</span></div>
+    </div>
+  </section>
+
+  <section class="slide" aria-label="Why design comes first">
+    <div class="inner">
+      <p class="eyebrow">Why we start with design</p>
+      <h2>Climate and impact work puts design last, and it shows.</h2>
+      <p class="lede">We spend months on the research and the message, then present it with default settings. Here is the same CO₂ data, shown two ways.</p>
+      <div class="pair">
+        <figure>
+          <svg id="ugly" viewBox="0 0 600 340" role="img" aria-label="A cluttered default bar chart of CO2 by year with a zero baseline that flattens the change"></svg>
+          <figcaption>Default settings</figcaption>
+        </figure>
+        <figure>
+          <svg id="designed" viewBox="0 0 600 340" role="img" aria-label="One line rising from 316 ppm in 1959 to 427 ppm in 2025, 53 percent above the pre-industrial 280 ppm"></svg>
+          <figcaption>With a design system</figcaption>
+        </figure>
+      </div>
+      <p class="qs"><i aria-hidden="true"></i><b>Mauna Loa annual mean CO₂, 1959 to 2025.</b> NOAA Global Monitoring Laboratory.</p>
+    </div>
+  </section>
+
+  <section class="slide" aria-label="Step 1: create a design system">
+    <div class="inner">
+      <p class="eyebrow">Claude Design</p>
+      <h2>Let's create a design system.</h2>
+      <p class="lede">A design system is the set of rules every screen follows. We decide them once, and Claude applies them everywhere.</p>
+      <div class="cols">
+        <div class="card lav">
+          <span class="k">What's in it</span>
+          <ul>
+            <li><span><b>Type.</b> One face for headlines, one for body, one for labels.</span></li>
+            <li><span><b>Colour.</b> A primary, an accent for the key number, and neutrals.</span></li>
+            <li><span><b>Spacing.</b> One scale for margins and gaps.</span></li>
+            <li><span><b>Components.</b> Buttons, cards and charts, built the same way each time.</span></li>
+          </ul>
+          <p><b>Why it matters:</b> we work at the element level. Change a button, a colour or a gap once, and every screen updates. Every page we make after that looks like it came from the same organisation.</p>
+        </div>
+        <div class="card butter">
+          <span class="k">The prompt</span>
+<pre class="prompt" id="prompt-1">Help me create a design system for <mark>[my org]</mark>, which works on <mark>[topic]</mark>.
+Before you build anything, ask me 3 short questions, one at a time: who it's for, the mood, and any brand colours or fonts I already use.
+Then set up type, colour, spacing and components (buttons, cards, a stat block, a simple chart).
+Show me a sample page that uses all of it.</pre>
+          <button type="button" class="copy" data-copy="prompt-1">Copy prompt</button>
+        </div>
+      </div>
+      <p class="qs"><i aria-hidden="true"></i><b>Live:</b> we'll build one now. Questions go in the chat.</p>
+    </div>
+  </section>
+
+  <section class="slide" aria-label="Step 2: add our build rules">
+    <div class="inner">
+      <p class="eyebrow">Claude Design + a skill</p>
+      <h2>Now let's add our build rules.</h2>
+      <p class="lede">tailwind-design is a skill I wrote for Claude. Tailwind turns styling into shared tokens and utility classes, so every page and tool we build follows the same rules. The skill tells Claude which rules to hold to.</p>
+      <div class="cols">
+        <div class="card lav">
+          <span class="k">The four rules</span>
+          <ul>
+            <li><span><b>Tokens first.</b> Every colour, size and gap comes from a named token.</span></li>
+            <li><span><b>Readable contrast.</b> Every text and background pair passes WCAG AA.</span></li>
+            <li><span><b>Flexbox first.</b> Grid only when rows and columns both matter.</span></li>
+            <li><span><b>Nothing tiny.</b> Body text and buttons stay at 16px or larger.</span></li>
+          </ul>
+        </div>
+        <div class="card butter">
+          <span class="k">The prompt</span>
+<pre class="prompt" id="prompt-2">Here is our tailwind-design skill. Adapt the design system to follow it: give every colour, font size and spacing value a named token, fix any text and background pair below WCAG AA, and keep body text at 16px or larger.</pre>
+          <button type="button" class="copy" data-copy="prompt-2">Copy prompt</button>
+        </div>
+      </div>
+      <button type="button" class="skill-open" id="skill-open">Open SKILL.md</button>
+      <p class="qs"><i aria-hidden="true"></i><b>Questions?</b> Put them in the chat.</p>
+    </div>
+  </section>
+
+  <section class="slide" aria-label="Step 3: redesign a real page">
+    <div class="inner tall">
+      <p class="eyebrow">Claude Design</p>
+      <h2>Now let's redesign a real climate page with it.</h2>
+      <p class="lede">Today's page is NOAA's <a class="inline" href="https://gml.noaa.gov/ccgg/trends/" target="_blank" rel="noreferrer">Trends in CO₂</a>. We paste four prompts into Claude Design, one at a time.</p>
+      <div class="ptabs" role="tablist" aria-label="Redesign prompts">
+        <button type="button" role="tab" id="tab-1" aria-controls="tp-1" aria-selected="true">Prompt 1</button>
+        <button type="button" role="tab" id="tab-2" aria-controls="tp-2" aria-selected="false" tabindex="-1">Prompt 2</button>
+        <button type="button" role="tab" id="tab-3" aria-controls="tp-3" aria-selected="false" tabindex="-1">Prompt 3</button>
+        <button type="button" role="tab" id="tab-4" aria-controls="tp-4" aria-selected="false" tabindex="-1">Prompt 4</button>
+      </div>
+      <div class="ptable">
+        <div class="prow" role="tabpanel" id="tp-1" aria-labelledby="tab-1">
+          <span class="pn">1</span>
+          <div class="pp" role="cell"><pre class="prompt" id="p3-1">This is a teaching demo. We're making an illustrative redesign concept of NOAA's public "Trends in CO2" page (gml.noaa.gov/ccgg/trends) to show how a design system improves a data page. It's a concept, not a copy or a replacement: no NOAA logo or branding, and a visible credit line, "Redesign concept · Data: NOAA Global Monitoring Laboratory". The data is public NOAA data.
+First, read the page. List its content blocks, its key numbers, and the five biggest reasons it's hard to read. Don't design anything yet.</pre><button type="button" class="copy" data-copy="p3-1">Copy</button></div>
+          <span class="pw" role="cell">Sets the context and audits the original.</span>
+        </div>
+        <div class="prow" role="tabpanel" id="tp-2" aria-labelledby="tab-2" hidden>
+          <span class="pn">2</span>
+          <div class="pp" role="cell"><pre class="prompt" id="p3-2">Plan one page for a curious non-scientist. Lead with the latest monthly reading and the change from a year ago. Then one chart of the full record with a dashed line at the pre-industrial 280 ppm. Then three short explainers: what Mauna Loa measures, why CO2 rises every year, and why it dips each summer. Put methodology and downloads in a collapsed section at the bottom. Show me the outline as a list first.</pre><button type="button" class="copy" data-copy="p3-2">Copy</button></div>
+          <span class="pw" role="cell">Plans the new structure before any visuals.</span>
+        </div>
+        <div class="prow" role="tabpanel" id="tp-3" aria-labelledby="tab-3" hidden>
+          <span class="pn">3</span>
+          <div class="pp" role="cell"><pre class="prompt" id="p3-3">Now design the page with our design system and the tailwind-design rules: tokens only, WCAG AA contrast on every text and background pair, flexbox first, nothing below 16px. Use the accent colour only on the latest reading. Use the real numbers from the page, and keep the credit line visible at the top and bottom.</pre><button type="button" class="copy" data-copy="p3-3">Copy</button></div>
+          <span class="pw" role="cell">Builds the redesign from our system and rules.</span>
+        </div>
+        <div class="prow" role="tabpanel" id="tp-4" aria-labelledby="tab-4" hidden>
+          <span class="pn">4</span>
+          <div class="pp" role="cell"><pre class="prompt" id="p3-4">Change the primary colour token to <mark>[deep blue]</mark> and list every element that updated.</pre><button type="button" class="copy" data-copy="p3-4">Copy</button></div>
+          <span class="pw" role="cell">Shows one token change carrying through the page.</span>
+        </div>
+      </div>
+      <p class="qs"><i aria-hidden="true"></i><b>Questions?</b> Put them in the chat.</p>
+    </div>
+  </section>
+
+  <section class="slide" aria-label="Step 4: take it into Claude Code">
+    <div class="inner">
+      <p class="eyebrow">Claude Code</p>
+      <h2>Now let's take it into Claude Code.</h2>
+      <p class="lede">Claude Design packages the design for Claude Code, so the code matches what we approved.</p>
+      <div class="cols">
+        <div class="card lav">
+          <span class="k">What we'll do</span>
+          <ol>
+            <li><span>In Claude Design, click Export, then Hand off to Claude Code.</span></li>
+            <li><span>Paste the prompt it gives us into Claude Code.</span></li>
+            <li><span>Build the redesigned page and compare it with the design.</span></li>
+          </ol>
+        </div>
+        <div class="card butter">
+          <span class="k">A typical handoff doc</span>
+          <ul>
+            <li><span>Design tokens: colours, fonts, spacing</span></li>
+            <li><span>Type scale and layout breakpoints</span></li>
+            <li><span>Components and their states</span></li>
+            <li><span>Assets and accessibility notes</span></li>
+          </ul>
+          <span class="k">What Claude Design sends</span>
+          <ul>
+            <li><span>The design files</span></li>
+            <li><span>Our chat, with the decisions and reasons</span></li>
+            <li><span>A README telling Claude Code how to read them</span></li>
+          </ul>
+        </div>
+      </div>
+      <p class="qs"><i aria-hidden="true"></i><b>Questions?</b> Put them in the chat.</p>
+    </div>
+  </section>
+
+  <section class="slide" aria-label="Step 5: make it move">
+    <div class="inner">
+      <p class="eyebrow">Claude Code + Remotion skill</p>
+      <h2>Now let's make it move.</h2>
+      <div class="ptabs" role="tablist" aria-label="Motion design">
+        <button type="button" role="tab" id="mtab-1" aria-controls="mp-1" aria-selected="true">Why motion</button>
+        <button type="button" role="tab" id="mtab-2" aria-controls="mp-2" aria-selected="false" tabindex="-1">Install</button>
+        <button type="button" role="tab" id="mtab-3" aria-controls="mp-3" aria-selected="false" tabindex="-1">Keeling 1</button>
+        <button type="button" role="tab" id="mtab-4" aria-controls="mp-4" aria-selected="false" tabindex="-1">Keeling 2</button>
+        <button type="button" role="tab" id="mtab-5" aria-controls="mp-5" aria-selected="false" tabindex="-1">The planet</button>
+      </div>
+      <div class="card dark mpanel" role="tabpanel" id="mp-1" aria-labelledby="mtab-1">
+        <span class="k">What motion design is</span>
+        <p>Animation with a purpose: a chart that draws itself, a number that counts up, a scene that changes as the data changes.</p>
+        <span class="k">Why it matters for climate and impact work</span>
+        <p>Most of our data is about change over time, and motion shows that change happening. Watching a line climb from 316 to 427 ppm sticks in a way a static chart rarely does, and a 20-second video travels on social channels where a report doesn't.</p>
+      </div>
+      <div class="card dark mpanel" role="tabpanel" id="mp-2" aria-labelledby="mtab-2" hidden>
+        <span class="k">Remotion, plus a skill for Claude Code</span>
+        <p>Remotion is open source and turns React code into video. The Remotion skill gives Claude Code its craft rules: no linear easing, staggered entrances, and render, inspect, fix before handing over.</p>
+<pre class="prompt code" id="m-install">git clone https://github.com/haidrrrry/claude-remotion-skill.git
+cp -r claude-remotion-skill/remotion-motion-graphics ~/.claude/skills/</pre>
+        <button type="button" class="copy" data-copy="m-install">Copy commands</button>
+        <p>Two commands. It's already installed on my machine, so we'll skip this live.</p>
+      </div>
+      <div class="card dark mpanel" role="tabpanel" id="mp-3" aria-labelledby="mtab-3" hidden>
+        <span class="k">The finished version · Remotion Studio</span>
+        <h3 class="planet">Keeling 1</h3>
+        <p>A 21-second video of 66 years of CO₂ readings from Mauna Loa, from about 316 ppm in 1959 to about 427 in 2025, ending on +53% over pre-industrial. It uses the same design system as the pages we built.</p>
+        <p>We'll play it first, then rebuild it from scratch as Keeling 2.</p>
+      </div>
+      <div class="card dark mpanel" role="tabpanel" id="mp-4" aria-labelledby="mtab-4" hidden>
+        <span class="k">Rebuild it live, one prompt at a time</span>
+        <div class="ptabs sub" role="tablist" aria-label="Keeling 2 prompts">
+          <button type="button" role="tab" id="ktab-1" aria-controls="kp-1" aria-selected="true">1 · Data</button>
+          <button type="button" role="tab" id="ktab-2" aria-controls="kp-2" aria-selected="false" tabindex="-1">2 · Theme</button>
+          <button type="button" role="tab" id="ktab-3" aria-controls="kp-3" aria-selected="false" tabindex="-1">3 · Scenes</button>
+          <button type="button" role="tab" id="ktab-4" aria-controls="kp-4" aria-selected="false" tabindex="-1">4 · Fix and render</button>
+          <button type="button" role="tab" id="ktab-5" aria-controls="kp-5" aria-selected="false" tabindex="-1">5 · Change live</button>
+        </div>
+        <div class="kpanel" role="tabpanel" id="kp-1" aria-labelledby="ktab-1">
+<pre class="prompt" id="k-1">In this Remotion project, create a new composition called Keeling2 and leave the existing Keeling composition untouched. Put its files in src/keeling2/.
+Download NOAA's annual mean CO2 data for Mauna Loa from
+https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_annmean_mlo.txt
+and save it as src/keeling2/data.ts, an array of [year, ppm] pairs.
+Show me the first year, the last year and their values. Don't build anything yet.</pre>
+          <button type="button" class="copy" data-copy="k-1">Copy prompt</button>
+          <p class="kwhat">Real data before any visuals. We check it ourselves: about 316 ppm in 1959 and 427 in 2025.</p>
+        </div>
+        <div class="kpanel" role="tabpanel" id="kp-2" aria-labelledby="ktab-2" hidden>
+<pre class="prompt" id="k-2">Create src/keeling2/theme.ts using the skill's theme template, with these tokens:
+background #FBFAF7, ink #14171A, secondary text #3B4147, muted #8A9098,
+rules #E4E1D9, brand green #0B6B45, hero amber #F5A623.
+Fonts: Newsreader for headlines, DM Sans for body, IBM Plex Mono for labels.
+Load the fonts from local files, not from the web. Amber is the hero colour
+and appears on one element per frame at most.</pre>
+          <button type="button" class="copy" data-copy="k-2">Copy prompt</button>
+          <p class="kwhat">Our design system in a third tool. Every scene reads its colours and fonts from this one file.</p>
+        </div>
+        <div class="kpanel" role="tabpanel" id="kp-3" aria-labelledby="ktab-3" hidden>
+<pre class="prompt" id="k-3">Build Keeling2 as a 21-second, 1920x1080 composition with four scenes:
+1. Hook: "Since 1959, one hilltop has measured the air every year."
+2. The curve draws itself from 1959 to 2025. A large ppm counter and the year
+   tick up with it. Show a dashed reference line for pre-industrial (about 280 ppm).
+   When the line finishes, an amber pill says how much CO2 has risen since 1959.
+3. Payoff: the percentage increase over 280 ppm, calculated from the data.
+4. Source card: NOAA Global Monitoring Laboratory, Mauna Loa annual mean, 1959-2025.
+Follow the skill's rules. Don't render the video yet. Render stills at frames
+40, 200, 330, 395, 480 and 600 and show them to me.</pre>
+          <button type="button" class="copy" data-copy="k-3">Copy prompt</button>
+          <p class="kwhat">The story beat by beat, with every number calculated from the data. Stills take seconds; a full render takes minutes.</p>
+        </div>
+        <div class="kpanel" role="tabpanel" id="kp-4" aria-labelledby="ktab-4" hidden>
+<pre class="prompt" id="k-4">Look at the stills with me. Check: text touching edges, anything that appears
+before its entrance, more than one amber element in a frame, and whether the
+corners look muddy on the light background. Fix what you find, re-render the
+stills, then render the full Keeling2 video with sound.</pre>
+          <button type="button" class="copy" data-copy="k-4">Copy prompt</button>
+          <p class="kwhat">The skill's check loop: Claude inspects its own frames and fixes them before the full render.</p>
+        </div>
+        <div class="kpanel" role="tabpanel" id="kp-5" aria-labelledby="ktab-5" hidden>
+<pre class="prompt" id="k-5">Open Keeling2 in Remotion Studio. Make the curve terracotta instead of green,
+and make the curve take two seconds longer to draw.</pre>
+          <button type="button" class="copy" data-copy="k-5">Copy prompt</button>
+          <p class="kwhat">Studio reloads as the code changes, and one theme edit updates every scene.</p>
+        </div>
+      </div>
+      <div class="card dark mpanel" role="tabpanel" id="mp-5" aria-labelledby="mtab-5" hidden>
+        <span class="k">What's possible · already built</span>
+        <h3 class="planet">Watch the air change.</h3>
+        <video class="mvideo" src="../05-motion/media/planet-co2.mp4" muted loop playsinline controls preload="metadata" aria-label="24-second 3D Earth whose atmosphere turns amber as CO2 rises"></video>
+        <p>A 24-second 3D Earth whose atmosphere thickens and turns amber as CO₂ climbs. Each orbiting point is 1 ppm above pre-industrial. It took about 12 minutes to render without a graphics card.</p>
+      </div>
+      <p class="qs"><i aria-hidden="true"></i><b>Questions?</b> Put them in the chat.</p>
+    </div>
+  </section>
+
+  <section class="slide" aria-label="Terra Studio Intensive">
+    <div class="inner">
+      <p class="eyebrow">Terra Studio Intensive</p>
+      <h2>Learn AI and build working tools for your climate and impact work in eight weeks.</h2>
+      <p class="lede">Each week ends with a project you can use. Fellows build data tools, agents and stories like the ones we made today, some with partner climate organisations.</p>
+      <div class="facts">
+        <div><span class="k">Time</span><b>6–10 h</b><small>a week, one live lab on Tuesdays</small></div>
+        <div class="learn"><span class="k">What you'll learn</span><ul class="tags"><li>Responsible AI</li><li>Data</li><li>Agents</li><li>Storytelling</li><li>Building and shipping</li><li>Capstone projects</li></ul></div>
+      </div>
+      <div class="row">
+        <a class="apply" href="https://studio.terra.do/intensive?utm_source=github" target="_blank" rel="noreferrer">studio.terra.do/intensive →</a>
+        <div class="links">
+          <a href="https://studio.terra.do/built?utm_source=github" target="_blank" rel="noreferrer">See what fellows built</a>
+        </div>
+      </div>
+          </div>
+  </section>
+
+</main>
+
+<div class="skill-overlay" id="skill-overlay" role="dialog" aria-modal="true" aria-labelledby="skill-title" hidden>
+  <div class="skill-panel">
+    <div class="skill-head">
+      <span class="k">~/.claude/skills/tailwind-design/SKILL.md</span>
+      <button type="button" id="skill-close" aria-label="Close">Close</button>
+    </div>
+    <div class="skill-body">
+      <h3 id="skill-title"># Tailwind design ground rules</h3>
+      <p>Apply these rules whenever writing, editing, or reviewing Tailwind classes.</p>
+      <h4>## 1. Token-first, no arbitrary values</h4>
+      <p>Colors, spacing, font sizes, and radii come from the theme, never from bracket syntax.</p>
+      <p class="code">Bad: w-[137px], text-[#2c2c2c], mt-[18px]<br>Good: w-content, text-ink, mt-6</p>
+      <h4>## 2. Use Tailwind's color palette</h4>
+      <p>No gray-on-gray, no gray on pure white or black. Every text and background pair meets WCAG AA (4.5:1 for body text). No transparency on text.</p>
+      <h4>## 3. Layout, flexbox first</h4>
+      <p>Default to flex with gap. Use grid only when rows and columns both matter. Avoid absolute positioning unless nothing else works.</p>
+      <h4>## 4. Type scale, nothing smaller than text-base</h4>
+      <p>Body copy, labels, buttons and nav are text-base or larger. text-sm is for captions and fine print only.</p>
+      <h4>## Applying this in a new project</h4>
+      <p>Port the project's existing tokens into the Tailwind theme first, so token-first has real tokens to point at.</p>
+    </div>
+  </div>
+</div>
+
+<nav class="nav" aria-label="Slides">
+  <span>Terra Studio</span>
+  <div class="ctrls">
+    <span class="count" id="count">1 / 8</span>
+    <button type="button" id="prev" aria-label="Previous slide">↑</button>
+    <button type="button" id="next" aria-label="Next slide">↓</button>
+  </div>
+</nav>
+
+<script>
+(function () {
+  var NS = "http://www.w3.org/2000/svg";
+  var data = [[1959,315.98],[1965,320.04],[1970,325.68],[1975,331.11],[1980,338.76],[1985,346.35],[1990,354.45],[1995,360.82],[2000,369.71],[2005,379.98],[2010,390.10],[2015,401.01],[2020,414.21],[2025,427.0]];
+  function el(name, attrs, parent, text) {
+    var n = document.createElementNS(NS, name);
+    for (var k in attrs) n.setAttribute(k, attrs[k]);
+    if (text != null) n.textContent = text;
+    if (parent) parent.appendChild(n);
+    return n;
+  }
+  var u = document.getElementById("ugly");
+  el("rect", { x: 0, y: 0, width: 600, height: 340, fill: "#FFFFFF" }, u);
+  el("text", { x: 300, y: 28, "text-anchor": "middle", "font-family": "Arial, sans-serif", "font-weight": "bold", "font-size": 18, fill: "#000000" }, u, "CO2 PPM BY YEAR");
+  var ux0 = 60, ux1 = 480, uy0 = 290, uy1 = 50;
+  for (var g = 0; g <= 450; g += 50) {
+    var gy = uy0 - (g / 450) * (uy0 - uy1);
+    el("line", { x1: ux0, x2: ux1, y1: gy, y2: gy, stroke: "#B0B0B0", "stroke-width": 1 }, u);
+    el("text", { x: ux0 - 8, y: gy + 4, "text-anchor": "end", "font-family": "Arial, sans-serif", "font-size": 11, fill: "#000000" }, u, g);
+  }
+  var rainbow = ["#FF0000","#FF7F00","#FFD700","#00C000","#0000FF","#8B00FF","#FF1493"];
+  var bw = (ux1 - ux0) / data.length;
+  data.forEach(function (d, i) {
+    var h = (d[1] / 450) * (uy0 - uy1);
+    var x = ux0 + i * bw + 3;
+    el("rect", { x: x + 3, y: uy0 - h + 3, width: bw - 6, height: h, fill: "#777777" }, u);
+    el("rect", { x: x, y: uy0 - h, width: bw - 6, height: h, fill: rainbow[i % rainbow.length], stroke: "#000000", "stroke-width": 1 }, u);
+    if (i % 2 === 0) el("text", { x: x + (bw - 6) / 2, y: uy0 + 18, "text-anchor": "middle", "font-family": "Arial, sans-serif", "font-size": 10, fill: "#000000", transform: "rotate(-35 " + (x + (bw - 6) / 2) + " " + (uy0 + 18) + ")" }, u, d[0]);
+  });
+  el("rect", { x: 495, y: 150, width: 92, height: 40, fill: "#F2F2F2", stroke: "#000000" }, u);
+  el("rect", { x: 503, y: 163, width: 14, height: 14, fill: "#FF0000", stroke: "#000000" }, u);
+  el("text", { x: 523, y: 175, "font-family": "Arial, sans-serif", "font-size": 12, fill: "#000000" }, u, "Series1");
+
+  var s = document.getElementById("designed");
+  el("rect", { x: 0, y: 0, width: 600, height: 340, fill: "#25272B" }, s);
+  var x0 = 40, x1 = 470, yMin = 270, yMax = 440, top = 40, bot = 290;
+  function X(yr) { return x0 + (yr - 1959) / (2025 - 1959) * (x1 - x0); }
+  function Y(v) { return bot - (v - yMin) / (yMax - yMin) * (bot - top); }
+  [1960, 1980, 2000, 2020].forEach(function (yr) {
+    el("text", { x: X(yr), y: 318, "text-anchor": "middle", "font-family": "IBM Plex Mono, monospace", "font-size": 12, fill: "#F4F4F2" }, s, yr);
+  });
+  el("line", { x1: x0, x2: x1, y1: Y(280), y2: Y(280), stroke: "#B9BCC1", "stroke-width": 1, "stroke-dasharray": "3 4" }, s);
+  el("text", { x: x0, y: Y(280) - 8, "font-family": "IBM Plex Mono, monospace", "font-size": 11, "letter-spacing": "0.08em", fill: "#F4F4F2" }, s, "PRE-INDUSTRIAL · 280 PPM");
+  var dpath = data.map(function (d, i) { return (i ? "L" : "M") + X(d[0]).toFixed(1) + " " + Y(d[1]).toFixed(1); }).join(" ");
+  var area = dpath + " L " + X(2025).toFixed(1) + " " + Y(280).toFixed(1) + " L " + X(1959).toFixed(1) + " " + Y(280).toFixed(1) + " Z";
+  el("path", { d: area, fill: "rgba(169,220,193,0.14)" }, s);
+  el("path", { d: dpath, fill: "none", stroke: "#A9DCC1", "stroke-width": 3, "stroke-linejoin": "round", "stroke-linecap": "round" }, s);
+  el("circle", { cx: X(1959), cy: Y(315.98), r: 4, fill: "#A9DCC1" }, s);
+  el("text", { x: X(1959) + 2, y: Y(315.98) - 12, "font-family": "IBM Plex Mono, monospace", "font-size": 12, fill: "#F4F4F2" }, s, "316 ppm · 1959");
+  el("circle", { cx: X(2025), cy: Y(427.0), r: 7, fill: "#F5A623", stroke: "#25272B", "stroke-width": 2 }, s);
+  el("text", { x: X(2025) + 16, y: Y(427.0) + 6, "font-family": "DM Sans, sans-serif", "font-weight": 700, "font-size": 30, fill: "#F4F4F2" }, s, "427");
+  el("text", { x: X(2025) + 16, y: Y(427.0) + 26, "font-family": "IBM Plex Mono, monospace", "font-size": 11, fill: "#F4F4F2" }, s, "PPM · 2025");
+  el("text", { x: X(2025) + 16, y: Y(427.0) + 62, "font-family": "DM Sans, sans-serif", "font-weight": 700, "font-size": 24, fill: "#F5A623" }, s, "+53%");
+  el("text", { x: X(2025) + 16, y: Y(427.0) + 80, "font-family": "IBM Plex Mono, monospace", "font-size": 11, fill: "#F4F4F2" }, s, "VS 280 PPM");
+
+  document.querySelectorAll("[data-copy]").forEach(function (copyBtn) {
+  var promptText = document.getElementById(copyBtn.getAttribute("data-copy"));
+  copyBtn.addEventListener("click", function () {
+    function selectIt() {
+      var r = document.createRange(); r.selectNodeContents(promptText);
+      var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
+      copyBtn.textContent = "Selected. Press Ctrl or Cmd + C";
+    }
+    try {
+      navigator.clipboard.writeText(promptText.textContent).then(function () {
+        copyBtn.textContent = "Copied";
+        setTimeout(function () { copyBtn.textContent = "Copy prompt"; }, 1800);
+      }, selectIt);
+    } catch (e) { selectIt(); }
+  });
+  });
+
+  var deck = document.getElementById("deck");
+  var slides = Array.prototype.slice.call(document.querySelectorAll(".slide"));
+  var count = document.getElementById("count");
+  var bar = document.getElementById("progress");
+  var current = 0;
+  function update(i) {
+    current = i;
+    count.textContent = (i + 1) + " / " + slides.length;
+    bar.style.width = ((i + 1) / slides.length * 100) + "%";
+  }
+  function go(i) {
+    i = Math.max(0, Math.min(slides.length - 1, i));
+    deck.scrollTo({ top: slides[i].offsetTop, behavior: "smooth" });
+    update(i);
+  }
+  deck.addEventListener("scroll", function () {
+    var i = Math.round(deck.scrollTop / deck.clientHeight);
+    if (i !== current && slides[i]) update(i);
+  }, { passive: true });
+  document.querySelectorAll(".ptabs").forEach(function (list) {
+    var tabs = Array.prototype.slice.call(list.querySelectorAll("[role=tab]"));
+    tabs.forEach(function (t) {
+      t.addEventListener("click", function () {
+        tabs.forEach(function (o) {
+          var on = o === t;
+          o.setAttribute("aria-selected", on ? "true" : "false");
+          o.tabIndex = on ? 0 : -1;
+          var panel = document.getElementById(o.getAttribute("aria-controls"));
+          panel.hidden = !on;
+          var v = panel.querySelector("video");
+          if (v) { try { if (on) { var pl = v.play(); if (pl && pl.catch) pl.catch(function () {}); } else { v.pause(); } } catch (e) {} }
+        });
+      });
+    });
+  });
+  var overlay = document.getElementById("skill-overlay");
+  var openBtn = document.getElementById("skill-open");
+  var closeBtn = document.getElementById("skill-close");
+  openBtn.addEventListener("click", function () { overlay.hidden = false; closeBtn.focus(); });
+  closeBtn.addEventListener("click", function () { overlay.hidden = true; openBtn.focus(); });
+  overlay.addEventListener("click", function (e) { if (e.target === overlay) { overlay.hidden = true; openBtn.focus(); } });
+  document.addEventListener("keydown", function (e) {
+    var k = e.key;
+    if (!overlay.hidden) { if (k === "Escape") { overlay.hidden = true; openBtn.focus(); } return; }
+    if (k === "ArrowDown" || k === "ArrowRight" || k === "PageDown" || (k === " " && !e.shiftKey)) { e.preventDefault(); go(current + 1); }
+    else if (k === "ArrowUp" || k === "ArrowLeft" || k === "PageUp" || (k === " " && e.shiftKey)) { e.preventDefault(); go(current - 1); }
+    else if (k === "Home") { e.preventDefault(); go(0); }
+    else if (k === "End") { e.preventDefault(); go(slides.length - 1); }
+  });
+  document.getElementById("prev").addEventListener("click", function () { go(current - 1); });
+  document.getElementById("next").addEventListener("click", function () { go(current + 1); });
+  update(0);
+})();
+</script>
+
+</body></html>

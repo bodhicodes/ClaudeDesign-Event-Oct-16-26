@@ -1,0 +1,9 @@
+node_modules/
+out/
+public/tex/
+.DS_Store
+_site/
+.jekyll-cache/
+vendor/
+Gemfile.lock
+_to_delete/

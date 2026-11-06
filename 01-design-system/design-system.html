@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Water Brand System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap">
+<link rel="stylesheet" href="tokens.css">
+<style>
+/* Every value below comes from tokens.css. No raw colours, sizes or gaps. */
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--color-amber-50); color: var(--color-teal-950); font-family: var(--font-sans); font-size: var(--text-base); line-height: 1.5; }
+h1, h2, h3, p { margin: 0; }
+.wrap { max-width: 72rem; margin: 0 auto; padding: 0 var(--spacing-6); }
+.section { padding: var(--spacing-section) 0; display: flex; flex-direction: column; gap: var(--spacing-stack); }
+.section + .section { border-top: 1px solid var(--color-stone-200); }
+.eyebrow { font-size: var(--text-base); letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; color: var(--color-orange-800); }
+.h2 { font-size: var(--text-5xl); line-height: 1.02; letter-spacing: -0.03em; font-weight: 800; }
+.serif { font-family: var(--font-serif); font-size: var(--text-lg); line-height: 1.5; color: var(--color-teal-800); max-width: 40rem; }
+.row { display: flex; flex-wrap: wrap; gap: var(--spacing-4); }
+.row > * { flex: 1 1 14rem; min-width: 0; }
+
+/* Overview */
+.hero { position: relative; overflow: hidden; background: var(--color-teal-950); color: var(--color-amber-50); }
+.hero .wrap { position: relative; padding-top: var(--spacing-20); padding-bottom: var(--spacing-20); display: flex; flex-direction: column; gap: var(--spacing-10); }
+.ring { position: absolute; border-radius: var(--radius-full); border: 2px solid var(--color-teal-800); }
+.sun { position: absolute; border-radius: var(--radius-full); background: var(--color-amber-300); }
+.mark { display: flex; align-items: center; gap: var(--spacing-4); flex-wrap: wrap; }
+.mark b { font-size: var(--text-2xl); font-weight: 600; }
+.mark span { font-size: var(--text-base); letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-teal-100); }
+.hero h1 { font-size: var(--text-6xl); line-height: 0.98; letter-spacing: -0.035em; font-weight: 800; max-width: 40rem; }
+.hero .lead { font-family: var(--font-serif); font-size: var(--text-2xl); line-height: 1.4; color: var(--color-teal-50); max-width: 34rem; }
+.principles { display: flex; flex-wrap: wrap; gap: var(--spacing-10); max-width: 52rem; }
+.principles > div { flex: 1 1 13rem; display: flex; flex-direction: column; gap: var(--spacing-2); }
+.principles .k { font-size: var(--text-base); letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-amber-300); font-weight: 600; }
+.principles h3 { font-size: var(--text-2xl); font-weight: 600; }
+.principles p { font-family: var(--font-serif); font-size: var(--text-lg); color: var(--color-teal-100); }
+
+/* Colour */
+.swatch { border-radius: var(--radius-2xl); min-height: 13rem; padding: var(--spacing-5); display: flex; flex-direction: column; justify-content: space-between; }
+.swatch b { font-size: var(--text-2xl); font-weight: 800; }
+.chip { display: flex; align-items: center; gap: var(--spacing-3); }
+.chip i { width: 3.5rem; height: 3.5rem; flex-shrink: 0; border-radius: var(--radius-xl); border: 1px solid var(--color-stone-200); }
+
+/* Type */
+.scale { background: var(--color-white); border: 1px solid var(--color-stone-200); border-radius: var(--radius-3xl); padding: var(--spacing-8); display: flex; flex-direction: column; gap: var(--spacing-6); }
+.step { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--spacing-2) var(--spacing-6); }
+.step span { flex: 0 0 7rem; color: var(--color-teal-800); }
+
+/* Components */
+.btn { display: inline-flex; align-items: center; height: 3rem; padding: 0 var(--spacing-7); border-radius: var(--radius-full); font-family: var(--font-sans); font-size: var(--text-lg); font-weight: 600; border: 0; text-decoration: none; }
+.btn.primary { background: var(--color-teal-700); color: var(--color-amber-50); }
+.btn.give { background: var(--color-amber-300); color: var(--color-teal-950); }
+.btn.outline { background: transparent; border: 2px solid var(--color-teal-700); color: var(--color-teal-700); }
+.buttons { display: flex; flex-wrap: wrap; gap: var(--spacing-3); }
+.card { background: var(--color-white); border: 1px solid var(--color-stone-200); border-radius: var(--radius-3xl); overflow: hidden; display: flex; flex-direction: column; }
+.card .photo { min-height: 10rem; background: var(--color-teal-100); color: var(--color-teal-800); display: flex; align-items: center; justify-content: center; padding: var(--spacing-4); text-align: center; }
+.card .body { padding: var(--spacing-6); display: flex; flex-direction: column; gap: var(--spacing-3); }
+.card h3 { font-size: var(--text-2xl); line-height: 1.12; font-weight: 600; }
+.stat { background: var(--color-teal-950); color: var(--color-amber-50); border-radius: var(--radius-3xl); padding: var(--spacing-8); display: flex; flex-direction: column; justify-content: space-between; gap: var(--spacing-6); }
+.stat .num { font-size: var(--text-7xl); line-height: 0.92; font-weight: 800; letter-spacing: -0.045em; color: var(--color-amber-300); }
+.stat p { font-family: var(--font-serif); font-size: var(--text-2xl); color: var(--color-teal-50); }
+.quote { background: var(--color-amber-300); border-radius: var(--radius-3xl); padding: var(--spacing-8); display: flex; flex-direction: column; justify-content: space-between; gap: var(--spacing-6); }
+.quote p { font-family: var(--font-serif); font-style: italic; font-size: var(--text-3xl); line-height: 1.2; }
+.field { display: flex; flex-direction: column; gap: var(--spacing-2); }
+.field label { font-weight: 600; }
+.field input { height: 3rem; padding: 0 var(--spacing-4); border: 2px solid var(--color-teal-600); border-radius: var(--radius-xl); background: var(--color-white); font-family: var(--font-sans); font-size: var(--text-lg); color: var(--color-teal-950); }
+.notice { background: var(--color-teal-100); border-radius: var(--radius-2xl); padding: var(--spacing-5) var(--spacing-6); display: flex; flex-direction: column; gap: var(--spacing-1); }
+.bar { height: 1rem; border-radius: var(--radius-full); background: var(--color-amber-100); overflow: hidden; }
+.bar div { width: 62%; height: 100%; background: var(--color-teal-700); border-radius: var(--radius-full); }
+a:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid var(--color-teal-950); outline-offset: 3px; }
+footer { background: var(--color-teal-950); color: var(--color-teal-50); padding: var(--spacing-8) 0; }
+footer a { color: var(--color-amber-300); }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="ring" style="width: 40rem; height: 40rem; right: -9rem; bottom: -9rem; border-color: var(--color-teal-900)"></div>
+  <div class="ring" style="width: 30rem; height: 30rem; right: -4rem; bottom: -4rem"></div>
+  <div class="ring" style="width: 20rem; height: 20rem; right: 1rem; bottom: 1rem; border-color: var(--color-teal-700)"></div>
+  <div class="sun" style="width: 10rem; height: 10rem; right: 6rem; bottom: 6rem"></div>
+  <div class="wrap">
+    <div class="mark">
+      <svg width="40" height="40" viewBox="0 0 64 64" aria-hidden="true"><path d="M32 4 C32 4 12 27 12 40 A20 20 0 0 0 52 40 C52 27 32 4 32 4 Z" fill="#fffbeb"/><path d="M24 44 a8 8 0 0 1 16 0 Z" fill="#f97316"/><path d="M19 51 q4.25 -3.5 8.5 0 t8.5 0 t8.5 0" fill="none" stroke="#0f766e" stroke-width="2.5" stroke-linecap="round"/></svg>
+      <b>[Org name]</b>
+      <span>Brand system · v1.0</span>
+    </div>
+    <h1>Warm hands. Clear water.</h1>
+    <p class="lead">One system for the website, the donor report, the field poster and the feed. Built to feel human first, and hopeful because it is specific.</p>
+    <div class="principles">
+      <div><span class="k">Principle 1</span><h3>Warm, never pitying</h3><p>People appear as capable neighbours and experts, not as victims.</p></div>
+      <div><span class="k">Principle 2</span><h3>Hopeful, with proof</h3><p>Optimism is earned by naming what changed: a tap, a well, a school day regained.</p></div>
+      <div><span class="k">Principle 3</span><h3>Plain and sturdy</h3><p>Works on a printed field poster, a phone screen and a funder deck alike.</p></div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="section" aria-labelledby="colour">
+    <p class="eyebrow">Colour</p>
+    <h2 class="h2" id="colour">Sun on water, earth underfoot</h2>
+    <p class="serif">Teal carries trust. Orange and amber carry the warmth and the hope. Amber 50 keeps everything human instead of clinical. Every colour is from Tailwind's default palette.</p>
+    <div class="row">
+      <div class="swatch" style="background: var(--color-teal-950); color: var(--color-amber-50)"><div><b>Well</b><div>teal-950 · #042f2e</div></div><div>Deep ground and body text. Amber-50 text 14.0 : 1</div></div>
+      <div class="swatch" style="background: var(--color-teal-700); color: var(--color-amber-50)"><div><b>Spring</b><div>teal-700 · #0f766e</div></div><div>Primary brand, buttons, links. Amber-50 text 5.3 : 1</div></div>
+      <div class="swatch" style="background: var(--color-orange-500); color: var(--color-teal-950)"><div><b>Sunrise</b><div>orange-500 · #f97316</div></div><div>Warmth: fills, icons, graphics. Teal-950 text 5.2 : 1</div></div>
+      <div class="swatch" style="background: var(--color-amber-300); color: var(--color-teal-950)"><div><b>Marigold</b><div>amber-300 · #fcd34d</div></div><div>Hope: highlights and giving. Teal-950 text 10.0 : 1</div></div>
+    </div>
+    <div class="row">
+      <div class="chip"><i style="background: var(--color-orange-800)"></i><div><b>Clay</b> · orange-800<br>Warnings and eyebrows</div></div>
+      <div class="chip"><i style="background: var(--color-teal-100)"></i><div><b>Dew</b> · teal-100<br>Water tint and notices</div></div>
+      <div class="chip"><i style="background: var(--color-amber-100)"></i><div><b>Sandstone</b> · amber-100<br>Quiet panels</div></div>
+      <div class="chip"><i style="background: var(--color-stone-200)"></i><div><b>Line</b> · stone-200<br>Borders</div></div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="type">
+    <p class="eyebrow">Typography</p>
+    <h2 class="h2" id="type">Bricolage Grotesque for the voice, Newsreader for the story</h2>
+    <div class="scale">
+      <div class="step"><span>Display · text-6xl</span><div style="font-size: var(--text-6xl); line-height: 1; font-weight: 800; letter-spacing: -0.035em">Water for all</div></div>
+      <div class="step"><span>H1 · text-5xl</span><div style="font-size: var(--text-5xl); line-height: 1.05; font-weight: 800; letter-spacing: -0.03em">A tap in every village</div></div>
+      <div class="step"><span>H2 · text-3xl</span><div style="font-size: var(--text-3xl); font-weight: 600">Where your gift goes</div></div>
+      <div class="step"><span>Lead · text-2xl</span><div style="font-family: var(--font-serif); font-size: var(--text-2xl); color: var(--color-teal-800)">Clean water changes the shape of a day, and who gets to spend it.</div></div>
+      <div class="step"><span>Body · text-lg</span><div style="font-family: var(--font-serif); font-size: var(--text-lg)">Body copy sits at text-lg on screens, at a measure of 60 to 70 characters.</div></div>
+      <div class="step"><span>Eyebrow · text-base</span><div class="eyebrow">Field report</div></div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="components">
+    <p class="eyebrow">Components</p>
+    <h2 class="h2" id="components">Built from the same tokens every time</h2>
+    <div class="buttons">
+      <a class="btn primary" href="#components">Join us</a>
+      <a class="btn give" href="#components">Give water</a>
+      <a class="btn outline" href="#components">Read the story</a>
+    </div>
+    <p class="serif">Spring is the default action. Marigold is kept for giving, once per screen.</p>
+    <div class="row">
+      <article class="card"><div class="photo">[Photo: a person at their tap, mid-conversation]</div><div class="body"><span class="eyebrow">Field report</span><h3>[Headline names a person and a change]</h3><p class="serif">[Two lines of story, in their words.]</p></div></article>
+      <article class="stat"><span class="eyebrow" style="color: var(--color-amber-300)">Impact</span><div><div class="num">[00,000]</div><p>people with year-round clean water</p></div></article>
+      <article class="quote"><span class="eyebrow" style="color: var(--color-teal-950)">Voice</span><p>“[A sentence in their own words, about what changed.]”</p><b>[Name], [village]</b></article>
+    </div>
+    <div class="row">
+      <div class="field"><label for="n">Your name</label><input id="n" type="text" placeholder="Amara Osei"></div>
+      <div class="field"><label for="g">Monthly gift</label><input id="g" type="text" value="$25"></div>
+    </div>
+    <div class="notice"><b>Notice</b><p class="serif" style="color: var(--color-teal-950)">Callouts use Dew with Well text. Clay is for warnings, never red.</p></div>
+    <div><div style="display: flex; justify-content: space-between; font-weight: 600; margin-bottom: var(--spacing-2)"><span>Well fund</span><span>62% funded</span></div><div class="bar"><div></div></div></div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">Made live in Claude Design on 16 Oct 2026 for a fictional water nonprofit. Tokens: <a href="tokens.css">tokens.css</a> · Tailwind theme: <a href="tailwind-theme.css">tailwind-theme.css</a></div>
+</footer>
+</body>
+</html>

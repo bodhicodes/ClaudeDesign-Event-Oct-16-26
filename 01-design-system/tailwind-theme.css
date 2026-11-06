@@ -1,0 +1,29 @@
+/* Water brand system as a Tailwind v4 theme.
+   Base colours, spacing, type sizes and radii come from Tailwind's default theme.
+   This file adds the fonts and the named roles the design system uses. */
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Bricolage Grotesque", system-ui, sans-serif;
+  --font-serif: "Newsreader", Georgia, serif;
+
+  --color-ground: var(--color-amber-50);
+  --color-panel: var(--color-amber-100);
+  --color-ink: var(--color-teal-950);
+  --color-ink-soft: var(--color-teal-800);
+  --color-brand: var(--color-teal-700);
+  --color-water: var(--color-teal-100);
+  --color-warmth: var(--color-orange-500);
+  --color-earth: var(--color-orange-800);
+  --color-hope: var(--color-amber-300);
+  --color-rule: var(--color-stone-200);
+
+  --spacing-tight: 0.5rem;
+  --spacing-stack: 1.5rem;
+  --spacing-gutter: 2.5rem;
+  --spacing-page: 4.5rem;
+  --spacing-section: 6rem;
+
+  --radius-control: var(--radius-xl);
+  --radius-card: var(--radius-3xl);
+}

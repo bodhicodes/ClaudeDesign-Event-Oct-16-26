@@ -1,0 +1,38 @@
+<section class="studio" aria-labelledby="studio-h">
+  <div class="container">
+    <div class="copy-block">
+      <p class="eyebrow">Terra Studio</p>
+      <h2 class="h2" id="studio-h">Learn AI and build real-world impact solutions.</h2>
+      <p>An eight-week intensive in responsible AI, data, agents and storytelling, where you build a working project each week. This session was one of our free Build With Us events.</p>
+    </div>
+    <div class="buttons">
+      <a class="btn btn-dark" href="https://studio.terra.do/intensive?utm_source=github">Explore the Intensive →</a>
+      <a class="btn btn-secondary" href="https://studio.terra.do/built?utm_source=github">See what fellows built →</a>
+    </div>
+  </div>
+</section>
+<footer class="footer">
+  <div class="container">
+    <div class="brand-block">
+      <b>Terra Studio</b>
+      <p>AI for impact professionals. CO₂ data from the NOAA Global Monitoring Laboratory.</p>
+    </div>
+    <ul>
+      <li><a href="https://studio.terra.do?utm_source=github">studio.terra.do</a></li>
+      <li><a href="https://terra.do">Terra.do</a></li>
+      <li><a href="https://github.com/{{ site.github.repository_nwo | default: 'OWNER/REPO' }}">Source on GitHub</a></li>
+      <li><span>© 2026 Terra.do</span></li>
+    </ul>
+  </div>
+</footer>
+<script>
+document.querySelectorAll('.prose pre').forEach(function (pre) {
+  var b = document.createElement('button');
+  b.type = 'button'; b.className = 'copy'; b.textContent = 'Copy';
+  b.addEventListener('click', function () {
+    var t = (pre.querySelector('code') || pre).innerText.trim();
+    navigator.clipboard.writeText(t).then(function () { b.textContent = 'Copied'; setTimeout(function () { b.textContent = 'Copy'; }, 1600); });
+  });
+  pre.appendChild(b);
+});
+</script>

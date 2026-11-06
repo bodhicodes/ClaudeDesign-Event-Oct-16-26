@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+{% include head.html %}
+</head>
+<body>
+{% include nav.html %}
+<main>
+  <section class="hero">
+    <div class="container">
+      <span class="pill">Build With Us · 16 Oct 2026</span>
+      <h1>Claude Design for climate and impact work.</h1>
+      <p class="lead">The prompts, files and code from our 16 October session, in five steps. Each step has the prompts we used and the files they produced.</p>
+      <div class="buttons">
+        <a class="btn btn-warm" href="{{ site.recording_url }}">Watch the recording →</a>
+        <a class="btn btn-secondary" href="{{ '/slides/' | relative_url }}">Open the slides</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="steps" aria-labelledby="steps-h">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Five steps</p>
+        <h2 id="steps-h">Work through them in the order we did.</h2>
+        <p>Each step gives Claude one job and something to check before you move on.</p>
+      </div>
+      <div class="steps">
+        {% for s in site.data.steps %}
+        <a class="step" href="{{ '/' | append: s.dir | append: '/' | relative_url }}">
+          <span class="num">0{{ forloop.index }}</span>
+          <div class="step-main"><h3>{{ s.title }}</h3><p>{{ s.summary }}</p></div>
+          <div class="step-meta"><span class="tag tag-{{ s.tag }}">{{ s.tag }}</span><span class="mono">{{ s.tools }}</span></div>
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="compare-h" style="padding-top: 0">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Step 4</p>
+        <h2 id="compare-h">The same NOAA data, before and after the design system.</h2>
+      </div>
+      <div class="compare">
+        <figure><div class="frame"><img src="{{ '/assets/noaa-before.png' | relative_url }}" alt="NOAA's Trends in CO2 page as published" loading="lazy"></div><figcaption>Before · gml.noaa.gov/ccgg/trends</figcaption></figure>
+        <figure><div class="frame"><img src="{{ '/assets/noaa-after.png' | relative_url }}" alt="The redesign concept, leading with the latest monthly reading" loading="lazy"></div><figcaption><a href="{{ '/04-redesign-a-page/redesign.html' | relative_url }}">After · open the live redesign →</a></figcaption></figure>
+        <figure><div class="frame"><img src="{{ '/assets/design-system.png' | relative_url }}" alt="The water brand system: overview, colour and type" loading="lazy"></div><figcaption><a href="{{ '/01-design-system/design-system.html' | relative_url }}">The design system · open it →</a></figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section dark" aria-labelledby="motion-h">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Step 5</p>
+        <h2 id="motion-h">66 years of Mauna Loa CO₂ in two short videos.</h2>
+        <p>Both videos come from the same NOAA data and were built with Claude Code and Remotion. The project is in the repo, so you can open it and render your own.</p>
+      </div>
+      <div class="videos">
+        <figure>
+          <video src="{{ '/05-motion/media/keeling-curve.mp4' | relative_url }}" poster="{{ '/05-motion/media/keeling-poster.jpg' | relative_url }}" controls preload="metadata" playsinline></video>
+          <figcaption><b>The Keeling curve</b><span>21 seconds. The line draws itself from 316 ppm in 1959 to 427 ppm in 2025.</span></figcaption>
+        </figure>
+        <figure>
+          <video src="{{ '/05-motion/media/planet-co2.mp4' | relative_url }}" poster="{{ '/05-motion/media/planet-poster.jpg' | relative_url }}" controls preload="metadata" playsinline></video>
+          <figcaption><b>Watch the air change</b><span>24 seconds. Each orbiting point is 1 ppm above the pre-industrial 280.</span></figcaption>
+        </figure>
+      </div>
+      <a class="btn btn-warm" href="{{ '/05-motion/' | relative_url }}">See the prompts behind them →</a>
+    </div>
+  </section>
+
+  <div class="container page-body">
+    <article class="prose">
+{% assign parts = content | split: '<h2' %}{% for p in parts offset: 1 %}{% unless p contains 'about-terra-studio' %}<h2{{ p }}{% endunless %}{% endfor %}
+    </article>
+  </div>
+</main>
+{% include footer.html %}
+</body>
+</html>

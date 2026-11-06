@@ -1,0 +1,29 @@
+title: Claude Design for climate and impact work
+description: Prompts, files and the Remotion project from Terra Studio's session on 16 October 2026.
+recording_url: https://youtu.be/cHEYSftA1fE
+markdown: kramdown
+kramdown:
+  input: GFM
+plugins:
+  - jekyll-readme-index
+  - jekyll-relative-links
+  - jekyll-optional-front-matter
+  - jekyll-titles-from-headings
+titles_from_headings:
+  strip_title: true
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default
+  - scope:
+      path: "README.md"
+    values:
+      layout: landing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - "05-motion/climate-motion/node_modules"
+  - "05-motion/climate-motion/out"
+  - _to_delete

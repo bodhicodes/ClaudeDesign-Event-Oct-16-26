@@ -1,0 +1,25 @@
+- dir: 01-design-system
+  title: Create a design system.
+  tag: design
+  summary: A colour, type, spacing and component system for a fictional water nonprofit, built by letting Claude ask you questions first.
+  tools: Claude Design
+- dir: 02-build-rules
+  title: Add build rules.
+  tag: design
+  summary: The same system converted to Tailwind tokens, with a skill that holds every page to readable contrast and type size.
+  tools: Claude Design · Tailwind · tailwind-design skill
+- dir: 03-claude-code
+  title: Take it into Claude Code.
+  tag: design
+  summary: The design system as one CSS file, and an HTML page that shows it working in code.
+  tools: Claude Code
+- dir: 04-redesign-a-page
+  title: Redesign a real page.
+  tag: data
+  summary: A redesign concept of NOAA's Trends in CO₂ page, built on the system with four prompts.
+  tools: Claude Code · Claude Design
+- dir: 05-motion
+  title: Make it move.
+  tag: comms
+  summary: Two short videos of 66 years of Mauna Loa CO₂ data, one of them a 3D Earth.
+  tools: Claude Code · Remotion
